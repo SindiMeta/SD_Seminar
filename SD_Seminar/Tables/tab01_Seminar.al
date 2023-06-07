@@ -3,6 +3,8 @@ table 50101 "CSD Seminar"
 //Lab 5.2: Task 2
 {
     Caption = 'Seminar';
+    LookupPageId = "CSD Seminar List";
+    DrillDownPageId = "CSD Seminar List";
 
     fields
     {
