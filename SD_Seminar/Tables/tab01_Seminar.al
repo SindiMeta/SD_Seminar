@@ -180,19 +180,31 @@ table 50101 "CSD Seminar"
         NoSeriesMgt: Codeunit NoSeriesManagement;
 
     procedure AssistEdit(): Boolean;
+    // begin
+    //     with Seminars do begin
+    //         Seminars := Rec;
+    //         SeminarSetup.get;
+    //         SeminarSetup.TestField("Seminar Nos.");
+    //         if NoSeriesMgt.SelectSeries(SeminarSetup."Seminar Nos."
+    //         , xRec."No. Series", "No. Series") then begin
+    //             NoSeriesMgt.SetSeries("No.");
+    //             Rec := Seminars;
+    //             exit(true);
+    //         end;
+    //     end;
+    // end;
 
     begin
-        with Seminars do begin
-            Seminars := Rec;
-            SeminarSetup.get;
-            SeminarSetup.TestField("Seminar Nos.");
-            if NoSeriesMgt.SelectSeries(SeminarSetup."Seminar Nos."
-            , xRec."No. Series", "No. Series") then begin
-                NoSeriesMgt.SetSeries("No.");
-                Rec := Seminars;
-                exit(true);
-            end;
+        Seminars := Rec;
+        SeminarSetup.get;
+        SeminarSetup.TestField("Seminar Nos.");
+        if NoSeriesMgt.SelectSeries(SeminarSetup."Seminar Nos."
+        , xRec."No. Series", Seminars."No. Series") then begin
+            NoSeriesMgt.SetSeries(Seminars."No.");
+            Rec := Seminars;
+            exit(true);
         end;
+
     end;
 
 }
