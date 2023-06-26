@@ -47,7 +47,7 @@ table 50101 "CSD Seminar"
 
 
         }
-        field(50; "Maximum Participants"; Code[20])
+        field(50; "Maximum Participants"; Integer)
         {
             Caption = 'Maximum Participants';
 
@@ -92,7 +92,7 @@ table 50101 "CSD Seminar"
         }
         field(110; "Gen. Prod. Posting Group"; Code[10])
         {
-            Caption = 'Gen. Prod. Posting Group';
+            Caption = 'General Production Posting Group';
             TableRelation = "Gen. Product Posting Group";
             trigger OnValidate();
             begin
@@ -107,7 +107,7 @@ table 50101 "CSD Seminar"
         }
         field(120; "VAT Prod. Posting Group"; Code[10])
         {
-            Caption = 'VAT Prod. Posting Group';
+            Caption = 'VAT Production Posting Group';
             TableRelation = "VAT Product Posting Group";
 
         }
@@ -134,7 +134,6 @@ table 50101 "CSD Seminar"
         }
     }
 
-    //OnInsert 
     trigger OnInsert()
 
     begin
@@ -145,21 +144,21 @@ table 50101 "CSD Seminar"
         end;
     end;
 
-    //On Modify
+
     trigger OnModify()
 
     begin
         "Last Date Modified" := Today;
     end;
 
-    //OnRename
+
     trigger OnRename()
 
     begin
         "Last Date Modified" := Today;
     end;
 
-    //OnDelete
+
     trigger OnDelete();
     begin
         CommentLine.Reset;
@@ -174,14 +173,13 @@ table 50101 "CSD Seminar"
 
     var
         SeminarSetup: Record "CSD Seminar Setup";
-        CommentLine: record "CSD Seminar Comment Line";
+        CommentLine: Record "CSD Seminar Comment Line";
         Seminars: Record "CSD Seminar";
 
         GenProdPostingGroup: Record "Gen. Product Posting Group";
         NoSeriesMgt: Codeunit NoSeriesManagement;
 
     procedure AssistEdit(): Boolean;
-
 
     begin
         //with Seminars do begin
@@ -194,6 +192,7 @@ table 50101 "CSD Seminar"
             Rec := Seminars;
             exit(true);
         end;
+        //end;
 
     end;
 
