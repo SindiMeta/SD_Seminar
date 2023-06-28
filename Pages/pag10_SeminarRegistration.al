@@ -10,6 +10,7 @@ page 50110 "CSD Seminar Registration"
     PageType = Card;
     SourceTable = "CSD Seminar Reg. Header";
     UsageCategory = tasks;
+    ApplicationArea = All;
 
     layout
     {

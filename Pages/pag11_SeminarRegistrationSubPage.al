@@ -8,6 +8,8 @@ page 50111 "CSD Seminar Reg. Subpage"
     DelayedInsert = true;
     PageType = List;
     SourceTable = "CSD Seminar Registration Line";
+    UsageCategory = Tasks;
+    ApplicationArea = All;
 
     layout
     {

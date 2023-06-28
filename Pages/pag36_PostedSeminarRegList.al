@@ -9,6 +9,8 @@ page 50136 "CSD Posted Seminar Reg. List"
     Editable = false;
     PageType = List;
     SourceTable = "CSD Posted Seminar Reg. Header";
+    UsageCategory = tasks;
+    ApplicationArea = all;
 
     layout
     {
@@ -18,27 +20,35 @@ page 50136 "CSD Posted Seminar Reg. List"
             {
                 field("No."; Rec."No.")
                 {
+                    ApplicationArea = all;
                 }
                 field("Starting Date"; Rec."Starting Date")
                 {
+                    ApplicationArea = all;
                 }
                 field("Seminar No."; Rec."Seminar No.")
                 {
+                    ApplicationArea = all;
                 }
                 field("Seminar Name"; Rec."Seminar Name")
                 {
+                    ApplicationArea = all;
                 }
                 field(Status; Rec.Status)
                 {
+                    ApplicationArea = all;
                 }
                 field(Duration; Rec.Duration)
                 {
+                    ApplicationArea = all;
                 }
                 field("Maximum Participants"; Rec."Maximum Participants")
                 {
+                    ApplicationArea = all;
                 }
                 field("Room Resource No."; Rec."Room Resource No.")
                 {
+                    ApplicationArea = all;
                 }
             }
         }

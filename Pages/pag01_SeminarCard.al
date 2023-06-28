@@ -115,6 +115,17 @@ page 50101 "CSD Seminar Card"
                     PromotedOnly = true;
                 }
 
+                // >> Lab 8 1-2
+                // action("Ledger Entries")
+                // {
+                //     Caption = 'Ledger Entries';
+                //     RunObject = page "CSD Seminar Ledger Entries";
+                //     RunPageLink = "Seminar No." = field("No.");
+                //     Promoted = true;
+                //     PromotedCategory = Process;
+                //     ShortcutKey = "Ctrl+F7";
+                //     Image = WarrantyLedger;
+                // }
 
             }
         }
