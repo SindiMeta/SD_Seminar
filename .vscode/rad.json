@@ -1,1 +1,1 @@
-﻿{"Added":[],"Modified":[],"Removed":[]}
+﻿{"Added":[{"Id":50101,"Kind":13,"Name":"SeminarRegParticipantList","PackagePath":"/src/Reports/rep01_SeminarRegParticipantList.al"},{"Id":50102,"Kind":11,"Name":"CSD SeminarRegPrinted","PackagePath":"/src/Codeunits/cod02_SeminarRegPrinted.al"}],"Modified":[{"Id":50110,"Kind":10,"Name":"CSD Seminar Reg. Header","PackagePath":"/src/Tables/tab10_SeminarRegistrationHeader.al"}],"Removed":[]}
