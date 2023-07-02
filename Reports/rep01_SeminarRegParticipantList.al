@@ -3,7 +3,7 @@ report 50101 "SeminarRegParticipantList"
     Caption = 'Seminar Registration Participant List';
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;
-    RDLCLayout = '‘./Layouts/SeminarRegParticipantList.rdl';
+    RDLCLayout = './Layouts/SeminarRegParticipantList.rdl';
     DefaultLayout = RDLC;
 
     dataset

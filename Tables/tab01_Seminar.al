@@ -161,10 +161,10 @@ table 50101 "CSD Seminar"
 
     trigger OnDelete();
     begin
-        CommentLine.Reset;
-        CommentLine.SetRange("Table Name", CommentLine."Table Name"::Seminar);
-        CommentLine.SetRange("No.", "No.");
-        CommentLine.DeleteAll;
+        // CommentLine.Reset;
+        // CommentLine.SetRange("Table Name", CommentLine."Table Name"::Seminar);
+        // CommentLine.SetRange("No.", "No.");
+        // CommentLine.DeleteAll;
     end;
 
 
@@ -182,17 +182,17 @@ table 50101 "CSD Seminar"
     procedure AssistEdit(): Boolean;
 
     begin
-        //with Seminars do begin
-        Seminars := Rec;
-        SeminarSetup.get;
-        SeminarSetup.TestField("Seminar Nos.");
-        if NoSeriesMgt.SelectSeries(SeminarSetup."Seminar Nos."
-        , xRec."No. Series", Seminars."No. Series") then begin
-            NoSeriesMgt.SetSeries(Seminars."No.");
-            Rec := Seminars;
-            exit(true);
+        with Seminars do begin
+            Seminars := Rec;
+            SeminarSetup.get;
+            SeminarSetup.TestField("Seminar Nos.");
+            if NoSeriesMgt.SelectSeries(SeminarSetup."Seminar Nos."
+            , xRec."No. Series", Seminars."No. Series") then begin
+                NoSeriesMgt.SetSeries(Seminars."No.");
+                Rec := Seminars;
+                exit(true);
+            end;
         end;
-        //end;
 
     end;
 

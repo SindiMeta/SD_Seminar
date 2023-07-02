@@ -5,7 +5,7 @@ table 50104 "CSD Seminar Comment Line"
 
 {
     Caption = 'Seminar Comment Line';
-    DataClassification = ToBeClassified;
+    //DataClassification = ToBeClassified;
     LookupPageId = "CSD Seminar Comment List";
     DrillDownPageId = "CSD Seminar Comment List";
 

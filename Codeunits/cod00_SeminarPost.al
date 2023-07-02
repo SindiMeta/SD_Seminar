@@ -94,6 +94,7 @@ codeunit 50100 "CSD Seminar-Post"
 
 
 
+
         end;
         Rec := SeminarRegHeader;
     end;

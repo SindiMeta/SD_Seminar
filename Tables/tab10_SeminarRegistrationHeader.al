@@ -8,6 +8,8 @@ table 50110 "CSD Seminar Reg. Header"
 {
 
     Caption = 'Seminar Registration Header';
+    LookupPageId = "CSD Posted Seminar Reg. List";
+    DrillDownPageId = "CSD Posted Seminar Reg. List";
 
     fields
     {
@@ -21,7 +23,7 @@ table 50110 "CSD Seminar Reg. Header"
                 if "No." <> xRec."No." then begin
                     SeminarSetup.GET;
                     NoSeriesMgt.TestManual(SeminarSetup."Seminar Nos.");
-                    //"No. Series" := '';
+                    "No. Series" := '';
                 end;
             end;
         }
@@ -270,18 +272,18 @@ table 50110 "CSD Seminar Reg. Header"
 
             trigger OnLookup();
             begin
-                //with SeminarRegHeader do begin
-                SeminarRegHeader := Rec;
-                SeminarSetup.GET;
-                SeminarSetup.TestField("Seminar Registration Nos.");
-                SeminarSetup.TestField("Posted Seminar Reg. Nos.");
-                if NoSeriesMgt.LookupSeries(SeminarSetup."Posted Seminar Reg. Nos.", "Posting No. Series")
-                then begin
-                    VALIDATE("Posting No. Series");
+                with SeminarRegHeader do begin
+                    SeminarRegHeader := Rec;
+                    SeminarSetup.GET;
+                    SeminarSetup.TestField("Seminar Registration Nos.");
+                    SeminarSetup.TestField("Posted Seminar Reg. Nos.");
+                    if NoSeriesMgt.LookupSeries(SeminarSetup."Posted Seminar Reg. Nos.", "Posting No. Series")
+                    then begin
+                        VALIDATE("Posting No. Series");
+                    end;
+                    Rec := SeminarRegHeader;
                 end;
-                Rec := SeminarRegHeader;
             end;
-            //end;
 
             trigger OnValidate();
             begin
@@ -398,16 +400,17 @@ table 50110 "CSD Seminar Reg. Header"
 
     procedure AssistEdit(OldSeminarRegHeader: Record "CSD Seminar Reg. Header"): Boolean;
     begin
-        ///with SeminarRegHeader do begin
-        SeminarRegHeader := Rec;
-        SeminarSetup.GET;
-        SeminarSetup.TestField("Seminar Registration Nos.");
-        if NoSeriesMgt.SelectSeries(SeminarSetup."Seminar Registration Nos.", OldSeminarRegHeader."No. Series", "No. Series") then begin
+        with SeminarRegHeader do begin
+            SeminarRegHeader := Rec;
             SeminarSetup.GET;
             SeminarSetup.TestField("Seminar Registration Nos.");
-            NoSeriesMgt.SetSeries("No.");
-            Rec := SeminarRegHeader;
-            exit(true);
+            if NoSeriesMgt.SelectSeries(SeminarSetup."Seminar Registration Nos.", OldSeminarRegHeader."No. Series", "No. Series") then begin
+                SeminarSetup.GET;
+                SeminarSetup.TestField("Seminar Registration Nos.");
+                NoSeriesMgt.SetSeries("No.");
+                Rec := SeminarRegHeader;
+                exit(true);
+            end;
         end;
     end;
     //end;
