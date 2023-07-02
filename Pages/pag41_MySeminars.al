@@ -36,7 +36,8 @@ page 50141 "CSD My Seminars"
         {
             action(Open)
             {
-
+                ApplicationArea = all;
+                Caption = 'Open';
                 trigger OnAction()
                 begin
                     OpenSeminarCard;

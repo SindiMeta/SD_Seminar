@@ -68,8 +68,10 @@ page 50134 "CSD Posted Seminar Reg."
                     ApplicationArea = all;
                 }
             }
-            part(SeminarRegistrationLines; 50135)
+            part(SeminarRegistrationLines; "CSD Post Seminar Reg. Subpage")
             {
+                Caption = 'SeminarRegistrationLines';
+                ApplicationArea = all;
                 //SubPageLink = Document No.=Field(No.);
                 SubPageLink = "Document No." = Field("No.");
             }
@@ -130,8 +132,10 @@ page 50134 "CSD Posted Seminar Reg."
             // {
             //     SubPageLink = No.=Field(Seminar No.);
             // }
-            part("CSD Seminar Details Factbox"; "CSD Seminar Details FactBox")
+            part("Seminar Details Factbox"; "CSD Seminar Details FactBox")
             {
+                ApplicationArea = all;
+                Caption = 'Seminar Details Factbox';
                 SubPageLink = "No." = Field("Seminar No.");
             }
 
@@ -142,6 +146,8 @@ page 50134 "CSD Posted Seminar Reg."
             // }
             part("Customer Details FactBox"; "Customer Details FactBox")
             {
+                ApplicationArea = all;
+                Caption = 'Customer Details FactBox';
                 Provider = SeminarRegistrationLines;
                 SubPageLink = "No." = Field("Bill-to Customer No.");
             }
@@ -154,9 +160,13 @@ page 50134 "CSD Posted Seminar Reg."
             // }
             systempart("Links"; Links)
             {
+                ApplicationArea = all;
+                Caption = 'Links';
             }
             systempart("Notes"; Notes)
             {
+                ApplicationArea = all;
+                Caption = 'Notes';
             }
         }
     }
@@ -171,6 +181,7 @@ page 50134 "CSD Posted Seminar Reg."
                 action("Co&mments")
                 {
                     Caption = 'Co&mments';
+                    ApplicationArea = all;
                     Image = Comment;
                     RunObject = Page "CSD Seminar Comment Sheet";
                     //RunPageLink = No.=Field(No.);
@@ -181,6 +192,7 @@ page 50134 "CSD Posted Seminar Reg."
                 }
                 action("&Charges")
                 {
+                    ApplicationArea = all;
                     Caption = '&Charges';
                     Image = Costs;
                     RunObject = Page "CSD Posted Seminar Charges";
@@ -193,10 +205,12 @@ page 50134 "CSD Posted Seminar Reg."
         {
             action("&Navigate")
             {
+                ApplicationArea = all;
                 Caption = '&Navigate';
                 Image = Navigate;
                 Promoted = true;
                 PromotedCategory = Process;
+
                 trigger OnAction();
                 var
                     Navigate: page Navigate;

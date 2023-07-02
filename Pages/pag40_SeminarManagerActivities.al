@@ -8,8 +8,6 @@ page 50140 "CSD Seminar Manager Activities"
     ApplicationArea = All;
     UsageCategory = Administration;
     SourceTable = "CSD Seminar Cue";
-    InsertAllowed = false;
-    DeleteAllowed = false;
     Editable = false;
 
     layout
@@ -34,6 +32,7 @@ page 50140 "CSD Seminar Manager Activities"
                     action(New)
                     {
                         Caption = 'New';
+                        ApplicationArea = all;
                         RunObject = page "CSD Seminar Registration";
                         RunPageMode = Create;
                     }

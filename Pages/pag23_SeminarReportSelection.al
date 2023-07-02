@@ -8,6 +8,8 @@ page 50123 "CSD Seminar Report Selection"
     PageType = Worksheet;
     SaveValues = true;
     SourceTable = "CSD Seminar Report Selections";
+    UsageCategory = Administration;
+    ApplicationArea = all;
 
     layout
     {
@@ -15,6 +17,7 @@ page 50123 "CSD Seminar Report Selection"
         {
             field(ReportUsage2; ReportUsage2)
             {
+                ApplicationArea = all;
                 Caption = 'Usage';
                 OptionCaption = 'Registration';
 
@@ -28,13 +31,16 @@ page 50123 "CSD Seminar Report Selection"
             {
                 field(Sequence; Rec.Sequence)
                 {
+                    ApplicationArea = all;
                 }
                 field("Report ID"; Rec."Report ID")
                 {
+                    ApplicationArea = all;
                     LookupPageID = Objects;
                 }
                 field("Report Name"; Rec."Report Name")
                 {
+                    ApplicationArea = all;
                     DrillDown = false;
                     LookupPageID = Objects;
                 }
@@ -44,17 +50,17 @@ page 50123 "CSD Seminar Report Selection"
         {
             systempart("Links"; Links)
             {
+                ApplicationArea = all;
+                Caption = 'Links';
                 Visible = false;
             }
             systempart("Notes"; Notes)
             {
+                ApplicationArea = all;
+                Caption = 'Notes';
                 Visible = false;
             }
         }
-    }
-
-    actions
-    {
     }
 
     trigger OnNewRecord(BelowxRec: Boolean);

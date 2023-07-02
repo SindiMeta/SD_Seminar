@@ -64,15 +64,21 @@ page 50136 "CSD Posted Seminar Reg. List"
             // systempart(; Notes)
             // {
             // }
-            part("CSD Seminar Details FactBox"; "CSD Seminar Details FactBox")
+            part("Seminar Details FactBox"; "CSD Seminar Details FactBox")
             {
+                ApplicationArea = all;
+                Caption = 'Seminar Details FactBox';
                 SubPageLink = "No." = Field("Seminar No.");
             }
             systempart("Links"; Links)
             {
+                ApplicationArea = all;
+                Caption = 'Links';
             }
             systempart("Notes"; Notes)
             {
+                ApplicationArea = all;
+                Caption = 'Notes';
             }
         }
     }
@@ -87,6 +93,7 @@ page 50136 "CSD Posted Seminar Reg. List"
                 action("Co&mments")
                 {
                     Caption = 'Co&mments';
+                    ApplicationArea = all;
                     Image = Comment;
                     RunObject = Page 50106;
                     RunPageLink = "No." = Field("No.");
@@ -97,6 +104,7 @@ page 50136 "CSD Posted Seminar Reg. List"
                 action("&Charges")
                 {
                     Caption = '&Charges';
+                    ApplicationArea = all;
                     Image = Costs;
                     RunObject = Page 50139;
                     //RunPageLink = Document No.=Field(No.);

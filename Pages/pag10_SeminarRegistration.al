@@ -75,6 +75,7 @@ page 50110 "CSD Seminar Registration"
                 part(SeminarRegistrationLines; "CSD Seminar Reg. Subpage")
                 {
                     caption = 'Lines';
+                    ApplicationArea = all;
                     SubPageLink = "Document No." = field("No.");
                 }
             }
@@ -133,18 +134,26 @@ page 50110 "CSD Seminar Registration"
         {
             part("Seminar Details FactBox"; "CSD Seminar Details FactBox")
             {
+                ApplicationArea = all;
+                Caption = 'Seminar Details FactBox';
                 SubPageLink = "No." = field("Seminar No.");
             }
             part("Customer Details Factbox"; "Customer Details FactBox")
             {
+                ApplicationArea = all;
+                Caption = 'Customer Details Factbox';
                 Provider = SeminarRegistrationLines;
                 SubPageLink = "No." = field("Bill-to Customer No.");
             }
             systempart("Links"; Links)
             {
+                ApplicationArea = all;
+                Caption = 'Links';
             }
             systempart("Notes"; Notes)
             {
+                ApplicationArea = all;
+                Caption = 'Notes';
             }
         }
     }
@@ -156,8 +165,10 @@ page 50110 "CSD Seminar Registration"
             group("&Seminar Registration")
             {
                 Caption = '&Seminar Registration';
+
                 action("Co&mments")
                 {
+                    ApplicationArea = all;
                     Caption = 'Co&mments';
                     Image = Comment;
                     RunObject = Page "CSD Seminar Comment Sheet";
@@ -166,6 +177,7 @@ page 50110 "CSD Seminar Registration"
                 }
                 action("&Charges")
                 {
+                    ApplicationArea = all;
                     Caption = '&Charges';
                     Image = Costs;
                     RunObject = Page "CSD Seminar Charges";
@@ -173,6 +185,7 @@ page 50110 "CSD Seminar Registration"
                 }
                 action("&Post")
                 {
+                    ApplicationArea = all;
                     Caption = '&Post';
                     Image = PostDocument;
                     Promoted = true;
@@ -183,6 +196,7 @@ page 50110 "CSD Seminar Registration"
                 }
                 action("&Print")
                 {
+                    ApplicationArea = all;
                     Caption = '&Print';
                     Image = Print;
                     Promoted = true;

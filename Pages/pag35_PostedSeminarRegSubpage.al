@@ -69,9 +69,5 @@ page 50135 "CSD Post Seminar Reg. Subpage"
             }
         }
     }
-
-    actions
-    {
-    }
 }
 

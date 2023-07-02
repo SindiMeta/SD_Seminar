@@ -55,11 +55,13 @@ page 50102 "CSD Seminar List"
         {
             systempart("Links"; Links)
             {
-
+                ApplicationArea = all;
+                Caption = 'Links';
             }
             systempart("Notes"; Notes)
             {
-
+                ApplicationArea = all;
+                Caption = 'Notes';
             }
         }
     }
@@ -72,8 +74,8 @@ page 50102 "CSD Seminar List"
             {
                 action("&Comments")
                 {
-
-
+                    Caption = '&Comments';
+                    ApplicationArea = All;
                     //RunObject = page "CSD Seminar Comment Sheet";
                     //RunObject = page "CSD Seminar Comment Sheet ";
                     //RunPageLink = "Table Name"=const(Seminar),"No."=field("No.");
@@ -85,6 +87,8 @@ page 50102 "CSD Seminar List"
                 // >> Lab 8-2
                 action("Ledger Entries")
                 {
+                    Caption = 'Ledger Entries';
+                    ApplicationArea = All;
                     RunObject = page "CSD Seminar Ledger Entries";
                     RunPageLink = "Seminar No." = field("No.");
                     Promoted = true;
@@ -94,6 +98,8 @@ page 50102 "CSD Seminar List"
                 }
                 action("&Registrations")
                 {
+                    ApplicationArea = all;
+                    Caption = '&Registrations';
                     RunObject = page "CSD Seminar Registration List";
                     RunPageLink = "Seminar No." = field("No.");
                     Image = Timesheet;
@@ -110,6 +116,8 @@ page 50102 "CSD Seminar List"
         {
             action("Seminar Registration")
             {
+                Caption = 'Seminar Registration';
+                ApplicationArea = all;
                 RunObject = page "CSD Seminar Registration";
                 RunPageLink = "Seminar No." = field("No.");
                 RunPageMode = Create;

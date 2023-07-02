@@ -47,40 +47,28 @@ page 50122 "CSD Seminar Registers"
         {
             systempart("Record Links"; Links)
             {
-
+                ApplicationArea = all;
+                Caption = 'Links';
             }
             systempart("Notes"; Notes)
             {
-
+                ApplicationArea = all;
+                Caption = 'Notes';
             }
         }
     }
 
     actions
     {
-        area(Processing)
-        {
-            action(ActionName)
-            {
-                ApplicationArea = All;
-
-                trigger OnAction()
-                begin
-
-                end;
-            }
-
-        }
         area(Navigation)
         {
             action("Seminar Ledgers")
             {
+                ApplicationArea = all;
+                Caption = 'Seminar Ledgers';
                 Image = WarrantyLedger;
                 RunObject = codeunit "CSD Seminar Reg.-Show Ledger";
             }
         }
     }
-
-    var
-        myInt: Integer;
 }

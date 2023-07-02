@@ -57,9 +57,5 @@ page 50139 "CSD Posted Seminar Charges"
             }
         }
     }
-
-    actions
-    {
-    }
 }
 
