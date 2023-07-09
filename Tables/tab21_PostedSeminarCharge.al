@@ -3,7 +3,7 @@ table 50120 "CSD Posted Seminar Charge"
     // CSD1.00 - 2018-01-01 - D. E. Veloper
     // Chapter 7 - Lab 3-4
     Caption = 'Posted Seminar Charge';
-
+    //Holds charges that are related to the completed (posted) seminar
     fields
     {
         field(1; "Document No."; Code[20])

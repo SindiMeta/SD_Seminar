@@ -5,7 +5,7 @@ table 50131 "CSD Seminar Journal Line"
     //     - Created new table
 
     Caption = 'Seminar Journal Line';
-
+    //Let you post the seminar ledger entries.
     fields
     {
         field(1; "Journal Template Name"; Code[10])

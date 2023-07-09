@@ -9,8 +9,7 @@ page 50110 "CSD Seminar Registration"
     Caption = 'Seminar Registration';
     PageType = Document;
     SourceTable = "CSD Seminar Reg. Header";
-    UsageCategory = tasks;
-    ApplicationArea = All;
+
 
     layout
     {
@@ -22,6 +21,7 @@ page 50110 "CSD Seminar Registration"
                 {
                     ApplicationArea = All;
                     AssistEdit = true;
+
                     trigger OnAssistEdit();
                     begin
                         if Rec.AssistEdit(xRec) then
@@ -40,6 +40,10 @@ page 50110 "CSD Seminar Registration"
                 {
                     ApplicationArea = All;
                 }
+                // field("Instructor Code";Rec."Instructor Code")
+                // {
+
+                // }
                 field("Instructor Resource No."; Rec."Instructor Resource No.")
                 {
                     ApplicationArea = All;
@@ -72,15 +76,19 @@ page 50110 "CSD Seminar Registration"
                 {
                     ApplicationArea = All;
                 }
+                ///lidhjen me lines
                 part(SeminarRegistrationLines; "CSD Seminar Reg. Subpage")
                 {
+                    ApplicationArea = All;
                     caption = 'Lines';
-                    ApplicationArea = all;
                     SubPageLink = "Document No." = field("No.");
                 }
             }
             group("Seminar Room")
             {
+                //  field("Room Code";Rec."Room Code")
+                // {
+                // }
                 field("Room Resource No."; Rec."Room Resource No.")
                 {
                     ApplicationArea = All;
@@ -135,25 +143,23 @@ page 50110 "CSD Seminar Registration"
             part("Seminar Details FactBox"; "CSD Seminar Details FactBox")
             {
                 ApplicationArea = all;
-                Caption = 'Seminar Details FactBox';
                 SubPageLink = "No." = field("Seminar No.");
             }
             part("Customer Details Factbox"; "Customer Details FactBox")
             {
                 ApplicationArea = all;
-                Caption = 'Customer Details Factbox';
                 Provider = SeminarRegistrationLines;
                 SubPageLink = "No." = field("Bill-to Customer No.");
             }
             systempart("Links"; Links)
             {
                 ApplicationArea = all;
-                Caption = 'Links';
+
             }
             systempart("Notes"; Notes)
             {
                 ApplicationArea = all;
-                Caption = 'Notes';
+
             }
         }
     }
@@ -213,6 +219,21 @@ page 50110 "CSD Seminar Registration"
             }
 
         }
+        area(Processing)
+        {
+            action("Post")
+            {
+                Caption = 'Post';
+                Image = PostDocument;
+                Promoted = true;
+                PromotedIsBig = true;
+                PromotedCategory = Process;
+                ShortcutKey = F9;
+                RunObject = codeunit "CSD Seminar-Post (Yes/No)";
+                ApplicationArea = All;
+            }
+        }
+
 
     }
 }

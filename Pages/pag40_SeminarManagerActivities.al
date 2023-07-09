@@ -5,8 +5,6 @@ page 50140 "CSD Seminar Manager Activities"
 {
     Caption = 'Seminar Manager Activities';
     PageType = CardPart;
-    ApplicationArea = All;
-    UsageCategory = Administration;
     SourceTable = "CSD Seminar Cue";
     Editable = false;
 
@@ -32,7 +30,6 @@ page 50140 "CSD Seminar Manager Activities"
                     action(New)
                     {
                         Caption = 'New';
-                        ApplicationArea = all;
                         RunObject = page "CSD Seminar Registration";
                         RunPageMode = Create;
                     }
@@ -41,6 +38,7 @@ page 50140 "CSD Seminar Manager Activities"
             }
             cuegroup("For Posting")
             {
+                Caption = 'For Posting';
                 field(Closed; Rec.Closed)
                 {
                     ApplicationArea = all;

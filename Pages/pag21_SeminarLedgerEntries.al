@@ -4,8 +4,7 @@ page 50121 "CSD Seminar Ledger Entries"
 {
     Caption = 'Seminar Ledger Entries';
     Editable = false;
-    PageType = Card;
-    ApplicationArea = All;
+    PageType = List;
     UsageCategory = Lists;
     SourceTable = "CSD Seminar Ledger Entry";
 
@@ -103,12 +102,34 @@ page 50121 "CSD Seminar Ledger Entries"
             systempart("Record Links"; Links)
             {
                 ApplicationArea = all;
-                Caption = 'Record Links';
+
             }
             systempart("Notes"; Notes)
             {
                 ApplicationArea = all;
-                Caption = 'Notes';
+
+            }
+        }
+    }
+    actions
+    {
+        area(Processing)
+        {
+            action("&Navigate")
+            {
+                Caption = '&Navigate';
+                Image = Navigate;
+                Promoted = true;
+                PromotedCategory = Process;
+                ApplicationArea = All;
+
+                trigger OnAction();
+                var
+                    Navigate: page Navigate;
+                begin
+                    Navigate.SetDoc(Rec."Posting Date", Rec."Document No.");
+                    Navigate.Run();
+                end;
             }
         }
     }

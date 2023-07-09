@@ -8,6 +8,7 @@ table 50132 "CSD Seminar Ledger Entry"
     // Chapter 8 - Lab 2 - 3
     // Added LookupPageId & DrilldownPageId properties
 
+    //Keeps the transaction details for all posted seminars.
     Caption = 'Seminar Ledger Entry';
     LookupPageId = "CSD Seminar Ledger Entries";
     DrillDownPageId = "CSD Seminar Ledger Entries";

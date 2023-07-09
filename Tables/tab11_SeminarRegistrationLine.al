@@ -1,3 +1,4 @@
+//the information about the participants in the seminar.
 table 50111 "CSD Seminar Registration Line"
 // CSD1.00 - 2018-01-01 - D. E. Veloper
 //   Chapter 6 - Lab 1-5
@@ -11,16 +12,20 @@ table 50111 "CSD Seminar Registration Line"
         {
             caption = 'Document No.';
             TableRelation = "CSD Seminar Reg. Header";
+            DataClassification = AccountData;
         }
         field(2; "Line No."; Integer)
         {
             caption = 'Line No.';
+            DataClassification = AccountData;
         }
         field(3; "Bill-to Customer No."; Code[20])
         {
             Caption = 'Bill-to Customer No.';
             TableRelation = Customer;
+            DataClassification = AccountData;
 
+            //makes sure that youcannot change the customer for the registered line.
             trigger OnValidate();
             begin
                 if "Bill-to Customer No." <> xRec."Bill-to Customer No." then begin
@@ -37,6 +42,7 @@ table 50111 "CSD Seminar Registration Line"
         {
             Caption = 'Participant Contact No.';
             TableRelation = Contact;
+            DataClassification = AccountData;
 
             trigger OnLookup();
             begin
@@ -51,7 +57,12 @@ table 50111 "CSD Seminar Registration Line"
 
                 CalcFields("Participant Name");
             end;
-
+            //makes sure that the contact selected by the user is related to the customer that is specified in the Bill-to Customer No. field. 
+            //It filters the information in the Contact Business 
+            //Relation table to determine whether the contact that the user has specified is related to the customer that is referenced in 
+            //the Bill-to Customer No. field. If the contact is not related to the customer, an error that describes the problem is thrown. 
+            //The trigger also calls the CalcField function to retrieve the Participant Name field from the Contact table. 
+            //The Participant Name field is a FlowField that uses the Lookup method to dynamically calculate the value of the field
             trigger OnValidate();
             begin
                 if ("Bill-to Customer No." <> '') and
@@ -81,25 +92,30 @@ table 50111 "CSD Seminar Registration Line"
         {
             Caption = 'Registration Date';
             Editable = false;
+            DataClassification = AccountData;
         }
         field(7; "To Invoice"; Boolean)
         {
             Caption = 'To Invoice';
             InitValue = true;
+            DataClassification = AccountData;
         }
         field(8; Participated; Boolean)
         {
             Caption = 'Participated';
+            DataClassification = AccountData;
         }
         field(9; "Confirmation Date"; Date)
         {
             Caption = 'Confirmation Date';
             Editable = false;
+            DataClassification = AccountData;
         }
         field(10; "Seminar Price"; Decimal)
         {
             Caption = 'Seminar Price';
             AutoFormatType = 2;
+            DataClassification = AccountData;
 
             trigger OnValidate();
             begin
@@ -118,6 +134,7 @@ table 50111 "CSD Seminar Registration Line"
                 if "Seminar Price" = 0 then begin
                     "Line Discount Amount" := 0;
                 end else begin
+                    //konfigurimi i librit kryesor
                     GLSetup.Get;
                     "Line Discount Amount" := Round("Line Discount %" * "Seminar Price" * 0.01, GLSetup."Amount Rounding Precision");
                 end;
@@ -128,6 +145,7 @@ table 50111 "CSD Seminar Registration Line"
         {
             Caption = 'Line Discount Amount';
             AutoFormatType = 1;
+            DataClassification = AccountData;
 
             trigger OnValidate();
             begin
@@ -144,6 +162,7 @@ table 50111 "CSD Seminar Registration Line"
         {
             Caption = 'Amount';
             AutoFormatType = 1;
+            DataClassification = AccountData;
 
             trigger OnValidate();
             begin
@@ -163,6 +182,7 @@ table 50111 "CSD Seminar Registration Line"
         {
             Caption = 'Registered';
             Editable = false;
+            DataClassification = AccountData;
         }
     }
 
@@ -180,7 +200,7 @@ table 50111 "CSD Seminar Registration Line"
 
     trigger OnInsert();
     begin
-        GetSeminarRegHeader;
+        GetSeminarRegHeader();
         "Registration Date" := WorkDate;
         "Seminar Price" := SeminarRegHeader."Seminar Price";
         Amount := SeminarRegHeader."Seminar Price";
@@ -196,6 +216,7 @@ table 50111 "CSD Seminar Registration Line"
         RegisteredErrorTxt: Label 'You cannot change the %1, because %2 is %3.';
         WrongContactErrorTxt: Label 'Contact %1 %2 is related to a different company than customer %3.';
 
+    //mban vleren te perditesuar
     local procedure GetSeminarRegHeader();
     begin
         if SeminarRegHeader."No." <> "Document No." then

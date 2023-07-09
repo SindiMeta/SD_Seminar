@@ -6,17 +6,17 @@ pageextension 50103 "CSD SourceCodeSetupExt" extends "Source Code Setup"
     {
         addafter("Cost Accounting")
         {
-            group("CSD Seminar Group")
+            group(SeminarGroup)
             {
                 Caption = 'Seminar';
-                //field("Seminar"; Rec."CSD Seminar")
+                // field("Seminar"; Rec."CSD Seminar")
                 // {
 
                 // }
 
             }
         }
-        addfirst("CSD Seminar Group")
+        addfirst(SeminarGroup)
         {
             field("Seminar"; Rec."CSD Seminar")
             {

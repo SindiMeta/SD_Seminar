@@ -6,6 +6,7 @@ tableextension 50100 "CSD ResourceExt" extends Resource
     {
         modify("Profit %")
         {
+            //modifikimi do te aktivizohet pasi fusha te jete validuar
             trigger OnAfterValidate()
 
             begin
@@ -18,7 +19,8 @@ tableextension 50100 "CSD ResourceExt" extends Resource
 
         modify(Type)
         {
-            Caption = 'Instructor,Room';
+
+            OptionCaption = 'Instructor,Room';
         }
 
         field(50101; "CSD Resource Type"; Option)

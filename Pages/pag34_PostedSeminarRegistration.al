@@ -10,8 +10,6 @@ page 50134 "CSD Posted Seminar Reg."
     Editable = false;
     PageType = Document;
     SourceTable = "CSD Posted Seminar Reg. Header";
-    UsageCategory = tasks;
-    ApplicationArea = all;
 
     layout
     {
@@ -135,7 +133,6 @@ page 50134 "CSD Posted Seminar Reg."
             part("Seminar Details Factbox"; "CSD Seminar Details FactBox")
             {
                 ApplicationArea = all;
-                Caption = 'Seminar Details Factbox';
                 SubPageLink = "No." = Field("Seminar No.");
             }
 
@@ -147,7 +144,6 @@ page 50134 "CSD Posted Seminar Reg."
             part("Customer Details FactBox"; "Customer Details FactBox")
             {
                 ApplicationArea = all;
-                Caption = 'Customer Details FactBox';
                 Provider = SeminarRegistrationLines;
                 SubPageLink = "No." = Field("Bill-to Customer No.");
             }
@@ -161,12 +157,12 @@ page 50134 "CSD Posted Seminar Reg."
             systempart("Links"; Links)
             {
                 ApplicationArea = all;
-                Caption = 'Links';
+
             }
             systempart("Notes"; Notes)
             {
                 ApplicationArea = all;
-                Caption = 'Notes';
+
             }
         }
     }
@@ -183,7 +179,7 @@ page 50134 "CSD Posted Seminar Reg."
                     Caption = 'Co&mments';
                     ApplicationArea = all;
                     Image = Comment;
-                    RunObject = Page "CSD Seminar Comment Sheet";
+                    RunObject = Page "CSD Seminar Comment List";
                     //RunPageLink = No.=Field(No.);
                     RunPageLink = "No." = Field("No.");
                     //RunPageView = where("Document Type"=const(Posted Seminar Registration));

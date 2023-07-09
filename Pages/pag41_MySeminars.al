@@ -1,8 +1,6 @@
 page 50141 "CSD My Seminars"
 {
     PageType = ListPart;
-    ApplicationArea = All;
-    UsageCategory = Administration;
     SourceTable = "“CSD My Seminars";
     Caption = 'My Seminars';
 
@@ -19,12 +17,15 @@ page 50141 "CSD My Seminars"
                 }
                 field(Name; Seminar.Name)
                 {
+                    ApplicationArea = all;
                 }
                 field(Duration; Seminar."Seminar Duration")
                 {
+                    ApplicationArea = all;
                 }
                 field(Price; Seminar."Seminar Price")
                 {
+                    ApplicationArea = all;
                 }
             }
         }
@@ -36,8 +37,7 @@ page 50141 "CSD My Seminars"
         {
             action(Open)
             {
-                ApplicationArea = all;
-                Caption = 'Open';
+                Image = Card;
                 trigger OnAction()
                 begin
                     OpenSeminarCard;

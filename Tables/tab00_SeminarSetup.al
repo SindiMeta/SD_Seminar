@@ -1,3 +1,4 @@
+//stores the setup configuration for seminars in the system
 table 50100 "CSD Seminar Setup"
 
 // CSD1.00 - 2018-01-01 - D. E. Veloper
@@ -16,6 +17,8 @@ table 50100 "CSD Seminar Setup"
         field(20; "Seminar Nos."; Code[20])
         {
             Caption = 'Seminar Nos.';
+            //lidhet me no. series te seminar table 
+            //ndodhet ne secilën master table që mban gjurmët e serive të numrave nga e cila është caktuar fusha No. .
             TableRelation = "No. Series";
 
         }

@@ -1,6 +1,7 @@
 table 50119 "CSD Posted Seminar Reg. Line"
 // CSD1.00 - 2018-01-01 - D. E. Veloper
 // Chapter 7 - Lab 3-3
+//Holds the detailed information for the completed(posted)seminar.Takesthedata fromtheSeminarRegistrationLinetable during posting.
 {
     Caption = 'Posted Seminar Registration Line';
 

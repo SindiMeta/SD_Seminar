@@ -1,4 +1,5 @@
 page 50111 "CSD Seminar Reg. Subpage"
+//This page is never used directly. The only purpose of this page is to include it as a subpage on the Seminar Registration document page.
 {
     // CSD1.00 - 2018-01-01 - D. E. Veloper
     //   Chapter 6 - Lab 3
@@ -6,10 +7,12 @@ page 50111 "CSD Seminar Reg. Subpage"
 
     Caption = 'Lines';
     DelayedInsert = true;
-    PageType = List;
+    PageType = ListPart;
     SourceTable = "CSD Seminar Registration Line";
-    UsageCategory = Tasks;
-    ApplicationArea = All;
+    AutoSplitKey = true;
+
+
+
 
     layout
     {

@@ -1,5 +1,6 @@
 table 50140 "CSD Seminar Cue"
 {
+    //Contains the flow fields for the cues on the Activities page part of the Role Center page.
     Caption = 'Seminar Cue';
     DataClassification = ToBeClassified;
 
@@ -9,6 +10,7 @@ table 50140 "CSD Seminar Cue"
         {
             Caption = 'Primary Key';
             DataClassification = ToBeClassified;
+
 
         }
         field(20; "Planned"; Integer)

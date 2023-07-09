@@ -2,6 +2,10 @@ codeunit 50139 "CSD EventSubscriptions"
 // CSD1.00 - 2018-01-01 - D. E. Veloper
 // Chapter 7 - Lab 4-4
 {
+    //This event subscriber method ensures that when a new record is inserted into the "Res. Ledger Entry" table, 
+    // the fields CSD Seminar No. and CSD Seminar Registration No. are populated with the corresponding values 
+    // from the "Res. Journal Line" record.
+
     [EventSubscriber(ObjectType::Codeunit, 212, 'OnBeforeResLedgEntryInsert', '', true, true)]
     local procedure PostResJnlLineOnBeforeResLedgEntryInsert(var ResLedgerEntry: Record "Res. Ledger Entry";
   ResJournalLine: Record "Res. Journal Line");
@@ -9,7 +13,7 @@ codeunit 50139 "CSD EventSubscriptions"
         ResLedgerEntry."CSD Seminar No." := ResJournalLine."CSD Seminar No.";
         ResLedgerEntry."CSD Seminar Registration No." := ResJournalLine."CSD Seminar Registration No.";
     end;
-
+    //Add code to the procedure to enable Navigate to find records from the Posted Seminar Reg. Header table
     [EventSubscriber(ObjectType::Page, 344, 'OnAfterNavigateFindRecords', '', true, true)]
     local procedure ExtendNavigateOnAfterNavigateFindRecords(var DocumentEntry: Record "Document Entry";
     DocNoFilter: Text;
@@ -43,7 +47,9 @@ codeunit 50139 "CSD EventSubscriptions"
             end;
         end;
     end;
-
+    //Add code to the procedure to enable Navigate to show records from both the
+    // Seminar Ledger Entries and the Posted Seminar Reg. Header tables
+    // filtered with the DocNoFilter and PostingDateFilter.
     [EventSubscriber(ObjectType::Page, 344, 'OnAfterNavigateShowRecords', '', true, true)]
     local procedure ExtendNavigateOnAfterNavigateShowRecords
     (TableID: Integer;

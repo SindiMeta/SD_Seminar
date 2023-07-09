@@ -1,14 +1,14 @@
 page 50100 "CSD Seminar Setup"
 // CSD1.00 - 2018-01-01 - D. E. Veloper
-//Lab 5.2: Task 4
+// Chapter 5 - Lab 2-3
 {
     PageType = Card;
-    InsertAllowed = false;
-    ApplicationArea = All;
-    DeleteAllowed = false;
     UsageCategory = Administration;
+    ApplicationArea = All;
     SourceTable = "CSD Seminar Setup";
     Caption = 'Seminar Setup';
+    InsertAllowed = false;
+    //DeleteAllowed = false;
 
     layout
     {
@@ -41,8 +41,11 @@ page 50100 "CSD Seminar Setup"
     trigger OnOpenPage()
 
     begin
+        //Merr një rekord bazuar në vlerat e ruajtura ne primary key
         if not Rec.get then begin
+            //Inicializon një rekord në një tabelë.
             Rec.Init();
+            //Fut një rekord në një tabelë pa ekzekutuar kodin në trigger OnInsert.
             Rec.Insert();
         end;
 

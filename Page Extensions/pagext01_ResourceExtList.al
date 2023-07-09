@@ -1,6 +1,7 @@
 pageextension 50110 "CSD ResourceListExt" extends "Resource List"
 
 // CSD1.00 - 2018-02-01 - D. E. Veloper
+// Chapter 5 - Lab 1-3
 
 {
     layout
@@ -8,6 +9,7 @@ pageextension 50110 "CSD ResourceListExt" extends "Resource List"
         modify(Type)
         {
             Visible = ShowType;
+
         }
         addafter(Type)
         {
@@ -19,7 +21,7 @@ pageextension 50110 "CSD ResourceListExt" extends "Resource List"
             }
             field("CSD Maximum Participants"; Rec."CSD Maximum Participants")
             {
-                //Visible = ShowMaxField;
+                Visible = ShowMaxField;
                 ApplicationArea = All;
             }
 
@@ -29,9 +31,10 @@ pageextension 50110 "CSD ResourceListExt" extends "Resource List"
 
     trigger OnOpenPage();
     begin
+
         ShowType := (Rec.GetFilter(Type) = '');
-        ShowMaxField := (Rec.GetFilter(Type) =
-        format(Rec.Type::Machine));
+        ShowMaxField := (Rec.GetFilter(Type) = format(Rec.Type::Machine));
+
     end;
 
     var

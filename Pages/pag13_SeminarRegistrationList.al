@@ -12,7 +12,7 @@ page 50113 "CSD Seminar Registration List"
     PageType = List;
     SourceTable = "CSD Seminar Reg. Header";
     UsageCategory = lists;
-    ApplicationArea = all;
+
 
     layout
     {
@@ -59,12 +59,12 @@ page 50113 "CSD Seminar Registration List"
             systempart("Links"; Links)
             {
                 ApplicationArea = all;
-                Caption = 'Links';
+
             }
             systempart("Notes"; Notes)
             {
                 ApplicationArea = all;
-                Caption = 'Notes';
+
 
             }
         }

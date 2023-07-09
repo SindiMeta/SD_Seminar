@@ -10,7 +10,10 @@ table 50101 "CSD Seminar"
     {
         field(10; "No."; Code[20])
         {
-            Caption = 'Primary Key';
+            Caption = 'No';
+
+            //kur përdoruesi ndryshon vlerën No., validoni që seria e numrave që përdoret për caktimin e numrit lejon numra manualë. 
+            //Pastaj vendoseni fushën Nr. Series bosh.
             trigger OnValidate();
             begin
                 if "No." <> xRec."No." then begin
@@ -25,6 +28,7 @@ table 50101 "CSD Seminar"
         field(20; "Name"; Text[50])
         {
             Caption = 'Name';
+            //vendosni kodin që përcakton Search Name field nëse ishte e barabartë me shkronjat e mëdha të vlerës së mëparshme të Name fiel.
             trigger OnValidate();
             begin
                 if ("Search Name" = UpperCase(xRec.Name)) or
@@ -86,7 +90,9 @@ table 50101 "CSD Seminar"
         field(100; "Seminar Price"; Decimal)
         {
             Caption = 'Seminar Price';
+            //sigurohet që vlera të jetë gjithmonë e formatuar si shumë
             AutoFormatType = 1;
+
 
 
         }
@@ -94,6 +100,9 @@ table 50101 "CSD Seminar"
         {
             Caption = 'General Production Posting Group';
             TableRelation = "Gen. Product Posting Group";
+
+            //nëse funksioni ValidateVatProdPostingGroup i tabelës Gen.ProductPostingGroup kthen true, 
+            //vendosni VATProd.PostingGroup në vlerën e fushës Def.VATProd.PostingGroup nga tabela Gen.ProductPosting Group
             trigger OnValidate();
             begin
                 if (xRec."Gen. Prod. Posting Group" <>
@@ -137,6 +146,7 @@ table 50101 "CSD Seminar"
     trigger OnInsert()
 
     begin
+        //nese nuk ka nje vlere ne No. caktoni vleren tjeter nga seria e numrave e specifikuar ne Seminar Nos. ne Seminar Table
         if "No." = '' then begin
             SeminarSetup.get;
             SeminarSetup.TestField("Seminar Nos.");
@@ -161,10 +171,11 @@ table 50101 "CSD Seminar"
 
     trigger OnDelete();
     begin
-        // CommentLine.Reset;
-        // CommentLine.SetRange("Table Name", CommentLine."Table Name"::Seminar);
-        // CommentLine.SetRange("No.", "No.");
-        // CommentLine.DeleteAll;
+        //për të fshirë çdo rresht komenti për regjistrimin e seminarit që po fshihet.
+        CommentLine.Reset;
+        CommentLine.SetRange("Table Name", CommentLine."Table Name"::Seminar);
+        CommentLine.SetRange("No.", "No.");
+        CommentLine.DeleteAll;
     end;
 
 
@@ -182,7 +193,14 @@ table 50101 "CSD Seminar"
     procedure AssistEdit(): Boolean;
 
     begin
-        with Seminars do begin
+        // that makes sure there is a value in the Seminar Nos. field in the Seminar Setup table, 
+        //and then calls the SelectSeries function in the NoSeriesManagement codeunit to check the series number. 
+        //If this function returns True, call the SetSeries function in the NoSeriesManagement codeunit to set the No. field, 
+        //and then return True.
+
+        Seminars.Reset();
+        if Seminars.FindFirst() then begin
+            //with Seminars do begin
             Seminars := Rec;
             SeminarSetup.get;
             SeminarSetup.TestField("Seminar Nos.");
@@ -193,7 +211,6 @@ table 50101 "CSD Seminar"
                 exit(true);
             end;
         end;
-
     end;
 
 }

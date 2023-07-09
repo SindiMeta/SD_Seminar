@@ -2,7 +2,12 @@ codeunit 50100 "CSD Seminar-Post"
 // CSD1.00 - 2018-01-01 - D. E. Veloper
 // Chapter 7 - Lab 4-7
 {
-
+    // Posts the complete seminar registration that includes the resource posting and seminar posting. • The codeunit transfers 
+    // the comment records to new comment records that correspond to the posted document. The codeunit also copies charges 
+    // to new tables that contain posted charges. • The codeunit creates a new Posted Seminar Reg. Header record and 
+    // Posted SeminarReg. Line records. • The codeunit then runs the job journal posting, and posts seminar ledger entries 
+    // for each participant, for the instructor, and for the room. Finally, 
+    // the codeunit deletes the records from the document tables. This includes the header, lines, comment lines, and charges.
 
     TableNo = 50110;
 

@@ -12,17 +12,24 @@ table 50112 "CSD Seminar Charge"
             Caption = 'Document No.';
             NotBlank = true;
             TableRelation = "CSD Seminar Reg. Header";
+            DataClassification = AccountData;
         }
         field(2; "Line No."; Integer)
         {
             Caption = 'Line No.';
+            DataClassification = AccountData;
+
         }
         field(3; Type; Option)
         {
             Caption = 'Type';
             OptionCaption = 'Resource,G/L Account';
             OptionMembers = Resource,"G/L Account";
-
+            DataClassification = AccountData;
+            //Ai ruan vlerën aktuale të fushës "Type" në një variabël të quajtur "OldType".
+            //Ai thërret procedurën "Init" për të inicializuar fushat e regjistrimit në vlerat e tyre të paracaktuara.
+            //Ai cakton vlerën e ruajtur të "OldType" përsëri në fushën "Type", duke rivendosur vlerën e saj origjinale.
+            //Qëllimi i këtij aktivizimi është të rivendosë fushat e regjistrimit në gjendjen e tyre fillestare nëse ndryshohet fusha "Type"
             trigger OnValidate();
             var
                 OldType: Integer;
@@ -40,7 +47,8 @@ table 50112 "CSD Seminar Charge"
             TableRelation = if (Type = const(Resource)) Resource."No."
             else
             if (Type = const("G/L Account")) "G/L Account"."No.";
-
+            //Ky aktivizues është përgjegjës për plotësimin e fushave përkatëse bazuar në "Lloji" i zgjedhur në regjistrim, pavarësisht nëse është një burim ose një llogari G/L. 
+            //Kryen vërtetime dhe kopjon vlerat e fushës në përputhje me rrethanat për të siguruar konsistencën dhe saktësinë e të dhënave.
             trigger OnValidate();
             begin
                 case Type of
@@ -70,11 +78,16 @@ table 50112 "CSD Seminar Charge"
         field(5; Description; Text[50])
         {
             Caption = 'Description';
+            DataClassification = AccountData;
         }
+        //quantity, unit price dhe total price jane te nderlidhura
+        //- Kur përdoruesi ndryshon ose sasinë ose çmimin për njësi, sistemi llogarit Çmimin Total.
+        //Kur përdoruesi ndryshon Çmimin Total, sistemi llogarit çmimin për njësi.
         field(6; Quantity; Decimal)
         {
             Caption = 'Quantity';
             DecimalPlaces = 0 : 5;
+            DataClassification = AccountData;
 
             trigger OnValidate();
             begin
@@ -86,6 +99,7 @@ table 50112 "CSD Seminar Charge"
             Caption = 'Unit Price';
             AutoFormatType = 2;
             MinValue = 0;
+            DataClassification = AccountData;
 
             trigger OnValidate();
             begin
@@ -97,6 +111,7 @@ table 50112 "CSD Seminar Charge"
             Caption = 'Total Price';
             AutoFormatType = 1;
             Editable = false;
+            DataClassification = AccountData;
 
             trigger OnValidate();
             begin
@@ -110,11 +125,13 @@ table 50112 "CSD Seminar Charge"
         {
             Caption = 'To Invoice';
             InitValue = true;
+            DataClassification = AccountData;
         }
         field(10; "Bill-to Customer No."; Code[20])
         {
             Caption = 'Bill-to Customer No.';
             TableRelation = Customer."No.";
+            DataClassification = AccountData;
         }
         field(11; "Unit of Measure Code"; Code[10])
         {
@@ -122,6 +139,7 @@ table 50112 "CSD Seminar Charge"
             TableRelation = if (Type = const(Resource)) "Resource Unit of Measure".Code where("Resource No." = Field("No."))
             else
             "Unit of Measure".Code;
+            DataClassification = AccountData;
 
             trigger OnValidate();
             begin
@@ -155,15 +173,18 @@ table 50112 "CSD Seminar Charge"
         {
             Caption = 'VAT Prod. Posting Group';
             TableRelation = "VAT Product Posting Group".Code;
+            DataClassification = AccountData;
         }
         field(14; "Qty. per Unit of Measure"; Decimal)
         {
             Caption = 'Qty. per Unit of Measure';
+            DataClassification = AccountData;
         }
         field(15; Registered; Boolean)
         {
             Caption = 'Registered';
             Editable = false;
+            DataClassification = AccountData;
         }
     }
 

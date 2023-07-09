@@ -5,12 +5,10 @@ page 50135 "CSD Post Seminar Reg. Subpage"
     //     - Created new page
 
     AutoSplitKey = true;
-    Caption = 'Lines';
+    Caption = 'Posted Lines';
     DelayedInsert = true;
     PageType = ListPart;
     SourceTable = "CSD Posted Seminar Reg. Line";
-    UsageCategory = Tasks;
-    ApplicationArea = all;
 
     layout
     {

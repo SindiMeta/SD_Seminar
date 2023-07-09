@@ -1,7 +1,14 @@
 codeunit 50131 "CSD Seminar Jnl.-Check Line"
 // CSD1.00 - 2018-01-01 - D. E. Veloper
 // Chapter 7 - Lab 2-1
+//Verifies the data validity of a seminar journal line before the posting routine posts it bydoing the following:
+//• The codeunit checks that thejournal line is not empty and that there are values for the Posting Date, Instructor Resource
+//No., and Seminar No.fields.
+//• Depending on whether the line is posting an Instructor, a Room, or a Participant, the codeunit checks that the applicable 
+//fields are not blank. The codeunit also verifies that the dates are valid.
 {
+
+    //This codeunit checks each line before posting. which is called from the Seminar Jnl.- Post Line codeunit
     TableNo = "CSD Seminar Journal Line";
 
     trigger OnRun()

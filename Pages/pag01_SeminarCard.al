@@ -1,12 +1,11 @@
 page 50101 "CSD Seminar Card"
 // CSD1.00 - 2018-01-01 - D. E. Veloper
-//Lab 5.2: Task 5
+// Chapter 5 - Lab 2-4 & Lab 2-5
 {
     PageType = Card;
     Caption = 'Seminar Card';
-    ApplicationArea = All;
-    UsageCategory = Administration;
     SourceTable = "CSD Seminar";
+
 
     layout
     {
@@ -19,6 +18,7 @@ page 50101 "CSD Seminar Card"
                     ApplicationArea = All;
                     AssistEdit = true;
 
+                    //per te mbesht funks e serise se numrave
                     trigger OnAssistEdit()
                     begin
                         if Rec.AssistEdit() then
@@ -64,6 +64,7 @@ page 50101 "CSD Seminar Card"
             }
             group(Invoicing)
             {
+
                 field("Gen. Prod. Posting Group"; Rec."Gen. Prod. Posting Group")
                 {
                     ApplicationArea = All;
@@ -88,12 +89,12 @@ page 50101 "CSD Seminar Card"
             systempart("Links"; Links)
             {
                 ApplicationArea = all;
-                Caption = 'Links';
+
             }
             systempart("Notes"; Notes)
             {
                 ApplicationArea = all;
-                Caption = 'Notes';
+
             }
         }
     }
@@ -105,13 +106,12 @@ page 50101 "CSD Seminar Card"
         {
             group("&Seminar")
             {
-                action("&Comments")
+                action("Co&mments")
                 {
-                    Caption = '&Comments';
+                    Caption = 'Co&mments';
                     ApplicationArea = All;
-                    //RunObject = page "CSD Seminar Comment Sheet";
-                    //RunObject = page "CSD Seminar Comment Sheet ";
-                    //RunPageLink = "Table Name"=const(Seminar),"No."=field("No.");
+                    RunObject = page "CSD Seminar Comment Sheet";
+                    RunPageLink = "Table Name" = const(Seminar), "No." = field("No.");
                     Image = Comment;
                     Promoted = true;
                     PromotedIsBig = true;

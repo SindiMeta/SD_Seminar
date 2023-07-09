@@ -4,6 +4,9 @@ codeunit 50101 "CSD Seminar-Post (Yes/No)"
     //   Chapter 7 - Lab 5-2
     //     - Created new codeunit
 
+    //Interacts with users and confirms that they want to post the registration. If users confirm the posting, the 
+    //codeunit runs the Seminar-Post codeunit.
+
     TableNo = 50110;
 
     trigger OnRun();
@@ -14,14 +17,14 @@ codeunit 50101 "CSD Seminar-Post (Yes/No)"
     end;
 
     var
-        SeminarRegHeader : Record "CSD Seminar Reg. Header";
-        SeminarPost : Codeunit "CSD Seminar-Post";
-        Text001 : Label 'Do you want to post the Registration?';
+        SeminarRegHeader: Record "CSD Seminar Reg. Header";
+        SeminarPost: Codeunit "CSD Seminar-Post";
+        Text001: Label 'Do you want to post the Registration?';
 
     local procedure "Code"();
     begin
-        if not Confirm(Text001,false) then
-          exit;
+        if not Confirm(Text001, false) then
+            exit;
         SeminarPost.RUN(SeminarRegHeader);
         COMMIT;
     end;

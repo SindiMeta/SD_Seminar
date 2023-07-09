@@ -1,6 +1,6 @@
 page 50102 "CSD Seminar List"
 // CSD1.00 - 2018-01-01 - D. E. Veloper
-//Lab 5.2: Task 6
+// Chapter 5 - Lab 2-6
 {
     PageType = List;
     ApplicationArea = All;
@@ -56,12 +56,12 @@ page 50102 "CSD Seminar List"
             systempart("Links"; Links)
             {
                 ApplicationArea = all;
-                Caption = 'Links';
+
             }
             systempart("Notes"; Notes)
             {
                 ApplicationArea = all;
-                Caption = 'Notes';
+
             }
         }
     }
@@ -76,9 +76,9 @@ page 50102 "CSD Seminar List"
                 {
                     Caption = '&Comments';
                     ApplicationArea = All;
-                    //RunObject = page "CSD Seminar Comment Sheet";
-                    //RunObject = page "CSD Seminar Comment Sheet ";
-                    //RunPageLink = "Table Name"=const(Seminar),"No."=field("No.");
+                    RunObject = page "CSD Seminar Comment Sheet";
+
+                    RunPageLink = "Table Name" = const(Seminar), "No." = field("No.");
                     Image = Comment;
                     Promoted = true;
                     PromotedIsBig = true;

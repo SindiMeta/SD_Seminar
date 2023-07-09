@@ -7,6 +7,7 @@ report 50100 "Create Seminar Invoices"
     Caption = 'Create Seminar Invoices';
     UsageCategory = ReportsAndAnalysis;
     ProcessingOnly = true;
+    ApplicationArea = All;
 
 
     dataset
@@ -14,6 +15,7 @@ report 50100 "Create Seminar Invoices"
         dataitem("Seminar Ledger Entry"; "CSD Seminar Ledger Entry")
         {
 
+            DataItemTableView = sorting("Bill-to Customer No.", "Seminar No.");
             trigger OnAfterGetRecord();
             begin
                 if "Bill-to Customer No." <> Customer."No." then
@@ -178,6 +180,7 @@ report 50100 "Create Seminar Invoices"
         Text006: Label 'not all the invoices were posted. A total of %1 invoices were not posted.';
         Text007: Label 'There is nothing to invoice.';
         Seminar: Record "CSD Seminar";
+        OldSeminarNo: Code[20];
 
     local procedure FinalizeSalesInvoiceHeader();
     begin
@@ -214,6 +217,25 @@ report 50100 "Create Seminar Invoices"
             Commit;
 
             NextLineNo := 10000;
+            OldSeminarNo := '';
+        end;
+    end;
+
+    local procedure InsertSeminarHeaderLine()
+    begin
+        if "Seminar Ledger Entry"."Seminar No." <> OldSeminarNo then begin
+            SalesLine.init();
+            SalesLine."Document No." := SalesHeader."No.";
+            SalesLine."Document Type" := SalesHeader."Document Type";
+            SalesLine."Line No." := NextLineNo;
+            NextLineNo += 10000;
+            Seminar.Get("Seminar Ledger Entry"."Seminar No.");
+            if "Seminar Ledger Entry".Description <> '' then
+                SalesLine.Description := "Seminar Ledger Entry".Description
+            else
+                SalesLine.Description := Seminar.Name;
+            SalesLine.Insert();
+            OldSeminarNo := "Seminar Ledger Entry"."Seminar No.";
         end;
     end;
 }

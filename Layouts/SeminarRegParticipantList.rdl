@@ -859,7 +859,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -979,7 +978,7 @@
               </Filter>
             </Filters>
             <Top>0.56333in</Top>
-            <Left>1.13833in</Left>
+            <Left>0.13833in</Left>
             <Height>3.575in</Height>
             <Width>7.35001in</Width>
             <Style>
@@ -992,7 +991,7 @@
         <Height>4.43in</Height>
         <Style />
       </Body>
-      <Width>10.83833in</Width>
+      <Width>7.48834in</Width>
       <Page>
         <PageHeader>
           <Height>1.27167in</Height>
@@ -1006,7 +1005,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Globals!ExecutionTime</Value>
+                      <Value>=Globals!ExecutionTime</Value>
                       <Style>
                         <FontStyle>Normal</FontStyle>
                         <FontFamily>Times New Roman</FontFamily>
@@ -1022,7 +1021,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox43</rd:DefaultName>
               <Top>0.15in</Top>
-              <Left>6.52167in</Left>
+              <Left>4.39667in</Left>
               <Height>0.25in</Height>
               <Width>2.90833in</Width>
               <Style>
@@ -1042,7 +1041,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>Globals!PageNumber &amp; “ of “ &amp; Globals!TotalPages</Value>
+                      <Value>=Globals!PageNumber &amp; “ of “ &amp; Globals!TotalPages</Value>
                       <Style>
                         <FontStyle>Normal</FontStyle>
                         <FontFamily>Times New Roman</FontFamily>
@@ -1058,7 +1057,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox44</rd:DefaultName>
               <Top>0.58833in</Top>
-              <Left>6.52167in</Left>
+              <Left>4.39667in</Left>
               <Height>0.25in</Height>
               <Width>2.90833in</Width>
               <ZIndex>1</ZIndex>
@@ -1079,7 +1078,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>User!UserID</Value>
+                      <Value>=User!UserID</Value>
                       <Style>
                         <FontStyle>Normal</FontStyle>
                         <FontFamily>Times New Roman</FontFamily>
@@ -1095,7 +1094,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox45</rd:DefaultName>
               <Top>0.90778in</Top>
-              <Left>6.52167in</Left>
+              <Left>4.39667in</Left>
               <Height>0.25in</Height>
               <Width>2.90833in</Width>
               <ZIndex>2</ZIndex>
@@ -1128,40 +1127,10 @@
               </Paragraphs>
               <rd:DefaultName>Textbox46</rd:DefaultName>
               <Top>0.48833in</Top>
-              <Left>1.255in</Left>
+              <Left>0.13in</Left>
               <Height>0.25in</Height>
               <Width>2.425in</Width>
               <ZIndex>3</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Company_Name">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=Last(Fields!Company_Name.Value, “DataSet_Result”)</Value>
-                      <Style />
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Company_Name</rd:DefaultName>
-              <Top>0.98in</Top>
-              <Left>1.255in</Left>
-              <Height>0.25in</Height>
-              <Width>2.425in</Width>
-              <ZIndex>4</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1193,170 +1162,16 @@
       </DefaultValue>
       <Prompt>SeminarRegistrationHeaderCap</Prompt>
     </ReportParameter>
-    <ReportParameter Name="No_Caption">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>No_Caption</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>No_Caption</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="Seminar_No_Caption">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>Seminar_No_Caption</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>Seminar_No_Caption</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="Seminar_NameCaption">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>Seminar_NameCaption</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>Seminar_NameCaption</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="Starting_DateCaption">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>Starting_DateCaption</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>Starting_DateCaption</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="DurationCaption">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>DurationCaption</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>DurationCaption</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="Instructor_NameCaption">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>Instructor_NameCaption</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>Instructor_NameCaption</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="Room_NameCaption">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>Room_NameCaption</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>Room_NameCaption</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="Bill_to_Customer_No_Caption">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>Bill_to_Customer_No_Caption</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>Bill_to_Customer_No_Caption</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="Participant_Contact_No_Caption">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>Participant_Contact_No_Caption</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>Participant_Contact_No_Caption</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="Participant_NameCaption">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>Participant_NameCaption</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>Participant_NameCaption</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="Company_NameCaption">
-      <DataType>String</DataType>
-      <DefaultValue>
-        <Values>
-          <Value>Company_NameCaption</Value>
-        </Values>
-      </DefaultValue>
-      <Prompt>Company_NameCaption</Prompt>
-    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>1</NumberOfColumns>
-      <NumberOfRows>12</NumberOfRows>
+      <NumberOfRows>1</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
           <RowIndex>0</RowIndex>
           <ParameterName>SeminarRegistrationHeaderCap</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>1</RowIndex>
-          <ParameterName>No_Caption</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>2</RowIndex>
-          <ParameterName>Seminar_No_Caption</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>3</RowIndex>
-          <ParameterName>Seminar_NameCaption</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>4</RowIndex>
-          <ParameterName>Starting_DateCaption</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>5</RowIndex>
-          <ParameterName>DurationCaption</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>6</RowIndex>
-          <ParameterName>Instructor_NameCaption</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>7</RowIndex>
-          <ParameterName>Room_NameCaption</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>8</RowIndex>
-          <ParameterName>Bill_to_Customer_No_Caption</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>9</RowIndex>
-          <ParameterName>Participant_Contact_No_Caption</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>10</RowIndex>
-          <ParameterName>Participant_NameCaption</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>11</RowIndex>
-          <ParameterName>Company_NameCaption</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

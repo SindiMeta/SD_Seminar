@@ -2,10 +2,10 @@ page 50122 "CSD Seminar Registers"
 // CSD1.00 - 2018-01-01 - D. E. Veloper
 // Chapter 7 - Lab 2-11
 {
+    //displays the registers that are created when seminar registrations are posted.
     Caption = 'Seminar Registers';
     Editable = false;
-    PageType = Card;
-    ApplicationArea = All;
+    PageType = List;
     UsageCategory = Lists;
     SourceTable = "CSD Seminar Register";
 
@@ -40,20 +40,15 @@ page 50122 "CSD Seminar Registers"
                     ApplicationArea = All;
 
                 }
+                field("From Entry No."; Rec."From Entry No.")
+                {
+                    ApplicationArea = All;
+                }
+                field("To Entry No."; Rec."To Entry No.")
+                {
+                    ApplicationArea = All;
+                }
 
-            }
-        }
-        area(factboxes)
-        {
-            systempart("Record Links"; Links)
-            {
-                ApplicationArea = all;
-                Caption = 'Links';
-            }
-            systempart("Notes"; Notes)
-            {
-                ApplicationArea = all;
-                Caption = 'Notes';
             }
         }
     }

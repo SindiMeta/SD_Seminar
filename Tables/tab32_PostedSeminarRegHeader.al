@@ -3,7 +3,8 @@ table 50118 "CSD Posted Seminar Reg. Header"
 // Chapter 7 - Lab 3-1
 // Chapter 8 - Lab 2 - 3
 // Added LookupPageId & DrilldownPageId properties
-
+//Holds the information for the completed (posted) seminar. Takes the data from the Seminar Registration Header 
+//table during posting.
 {
 
     Caption = 'Posted Seminar Registration Header';

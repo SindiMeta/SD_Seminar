@@ -1,5 +1,6 @@
 table 50141 "“CSD My Seminars"
 {
+    //Contains the list of seminars that each user has included in the My Seminars list.
     DataClassification = ToBeClassified;
     Caption = 'My Seminars';
 
@@ -10,14 +11,16 @@ table 50141 "“CSD My Seminars"
             Caption = 'User ID';
             TableRelation = User;
             DataClassification = ToBeClassified;
+            ;
 
 
         }
         field(20; "Seminar No."; Code[20])
         {
             Caption = 'Seminar No.';
-            TableRelation = User;
+            TableRelation = "CSD Seminar";
             DataClassification = ToBeClassified;
+            ;
 
         }
 
@@ -30,28 +33,4 @@ table 50141 "“CSD My Seminars"
             Clustered = true;
         }
     }
-
-    var
-        myInt: Integer;
-
-    trigger OnInsert()
-    begin
-
-    end;
-
-    trigger OnModify()
-    begin
-
-    end;
-
-    trigger OnDelete()
-    begin
-
-    end;
-
-    trigger OnRename()
-    begin
-
-    end;
-
 }

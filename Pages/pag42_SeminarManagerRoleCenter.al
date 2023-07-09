@@ -5,8 +5,6 @@ page 50142 "CSD Seminar Manager RoleCenter"
 {
     Caption = 'Seminar Manager RoleCenter';
     PageType = RoleCenter;
-    UsageCategory = Administration;
-    ApplicationArea = all;
 
 
 
@@ -19,12 +17,12 @@ page 50142 "CSD Seminar Manager RoleCenter"
                 part(Activities; "CSD Seminar Manager Activities")
                 {
                     ApplicationArea = all;
-                    Caption = 'Activities';
+
                 }
                 part(MySeminars; "CSD My Seminars")
                 {
                     ApplicationArea = all;
-                    Caption = 'My Seminars';
+
                 }
             }
             group(Column2)
@@ -32,17 +30,17 @@ page 50142 "CSD Seminar Manager RoleCenter"
                 part(MyCustomers; "My Customers")
                 {
                     ApplicationArea = all;
-                    Caption = 'My Customers';
+
                 }
                 systempart(MyNotifications; MyNotes)
                 {
                     ApplicationArea = all;
-                    Caption = 'My Notifications';
+
                 }
                 part(ReportInbox; "Report Inbox Part")
                 {
                     ApplicationArea = all;
-                    Caption = 'Report Inbox';
+
                 }
             }
         }
@@ -108,7 +106,7 @@ page 50142 "CSD Seminar Manager RoleCenter"
 
             action(Customers)
             {
-                ApplicationArea = all;
+                ApplicationArea = Basic, Suite;
                 Caption = 'Customers';
                 Image = Customer;
                 RunObject = Page "Customer List";
