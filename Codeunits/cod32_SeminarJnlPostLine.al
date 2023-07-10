@@ -2,7 +2,7 @@ codeunit 50132 "CSD Seminar Jnl.-Post Line"
 // CSD1.00 - 2018-01-01 - D. E. Veloper
 // Chapter 7 - Lab 2-8
 
-//• Performs the posting of the Seminar Journal Line. The codeunit creates a SeminarLedgerEntryforeachSeminar
+//• Performs the posting of the Seminar Journal Line. The codeunit creates a Seminar Ledger Entry for each Seminar
 //Journal Line and creates a Seminar Register to track which entries are created during the posting
 {
 

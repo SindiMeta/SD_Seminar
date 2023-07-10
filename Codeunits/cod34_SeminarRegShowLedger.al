@@ -4,8 +4,6 @@ codeunit 50134 "CSD Seminar Reg.-Show Ledger"
 {
 
     //This codeunit shows the ledger entries that result from a single journal posting.
-    // The transaction is defined by the Seminar Register record that this function receives through the Rec parameter 
-    // of the OnRun trigger.
 
     TableNo = "CSD Seminar Register";
     // the codeunit runs the CSD Seminar Ledger Entries page showing only those entries between the From Entry No. 
