@@ -45,7 +45,6 @@ table 50133 "CSD Seminar Register"
             begin
                 //UserMgt.LookupById("User ID");
                 UserMgt.DisplayUserInformationBySID("User ID");
-
             end;
         }
         field(7; "Journal Batch Name"; Code[10])
@@ -67,4 +66,3 @@ table 50133 "CSD Seminar Register"
         }
     }
 }
-

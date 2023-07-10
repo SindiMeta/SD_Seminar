@@ -10,9 +10,8 @@ table 50132 "CSD Seminar Ledger Entry"
 
     //Keeps the transaction details for all posted seminars.
     Caption = 'Seminar Ledger Entry';
-    LookupPageId = "CSD Seminar Ledger Entries";
     DrillDownPageId = "CSD Seminar Ledger Entries";
-
+    LookupPageId = "CSD Seminar Ledger Entries";
 
     fields
     {
@@ -151,7 +150,7 @@ table 50132 "CSD Seminar Ledger Entry"
         field(28; "User ID"; Code[50])
         {
             Caption = 'User ID';
-            TableRelation = user where("User Name" = field("User Id"));
+            TableRelation = User where("User Name" = field("User ID"));
             ValidateTableRelation = false;
 
             trigger OnLookup();
@@ -169,11 +168,9 @@ table 50132 "CSD Seminar Ledger Entry"
     {
         key(Key1; "Entry No.")
         {
-
         }
         key(Key2; "Document No.", "Posting Date")
         {
         }
     }
 }
-

@@ -13,118 +13,118 @@ page 50134 "CSD Posted Seminar Reg."
 
     layout
     {
-        area(content)
+        area(Content)
         {
             group(General)
             {
                 field("No."; Rec."No.")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Starting Date"; Rec."Starting Date")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Seminar No."; Rec."Seminar No.")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Seminar Name"; Rec."Seminar Name")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Instructor Resource No."; Rec."Instructor Resource No.")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Instructor Name"; Rec."Instructor Name")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Posting Date"; Rec."Posting Date")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Document Date"; Rec."Document Date")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field(Status; Rec.Status)
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field(Duration; Rec.Duration)
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Minimum Participants"; Rec."Minimum Participants")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Maximum Participants"; Rec."Maximum Participants")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
             }
             part(SeminarRegistrationLines; "CSD Post Seminar Reg. Subpage")
             {
+                ApplicationArea = All;
                 Caption = 'SeminarRegistrationLines';
-                ApplicationArea = all;
                 //SubPageLink = Document No.=Field(No.);
-                SubPageLink = "Document No." = Field("No.");
+                SubPageLink = "Document No." = field("No.");
             }
             group("Seminar Room")
             {
                 field("Room Resource No."; Rec."Room Resource No.")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Room Name"; Rec."Room Name")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Room Address"; Rec."Room Address")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Room Address 2"; Rec."Room Address 2")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Room Post Code"; Rec."Room Post Code")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Room City"; Rec."Room City")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Room Country/Reg. Code"; Rec."Room Country/Reg. Code")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Room County"; Rec."Room County")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
             }
             group(Invoicing)
             {
                 field("Gen. Prod. Posting Group"; Rec."Gen. Prod. Posting Group")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("VAT Prod. Posting Group"; Rec."VAT Prod. Posting Group")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Seminar Price"; Rec."Seminar Price")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
             }
         }
-        area(factboxes)
+        area(FactBoxes)
         {
             // part(;50117)
             // {
@@ -132,8 +132,8 @@ page 50134 "CSD Posted Seminar Reg."
             // }
             part("Seminar Details Factbox"; "CSD Seminar Details FactBox")
             {
-                ApplicationArea = all;
-                SubPageLink = "No." = Field("Seminar No.");
+                ApplicationArea = All;
+                SubPageLink = "No." = field("Seminar No.");
             }
 
             // part(;9084)
@@ -143,9 +143,9 @@ page 50134 "CSD Posted Seminar Reg."
             // }
             part("Customer Details FactBox"; "Customer Details FactBox")
             {
-                ApplicationArea = all;
+                ApplicationArea = All;
                 Provider = SeminarRegistrationLines;
-                SubPageLink = "No." = Field("Bill-to Customer No.");
+                SubPageLink = "No." = field("Bill-to Customer No.");
             }
 
             // systempart(;Links)
@@ -156,44 +156,41 @@ page 50134 "CSD Posted Seminar Reg."
             // }
             systempart("Links"; Links)
             {
-                ApplicationArea = all;
-
+                ApplicationArea = All;
             }
             systempart("Notes"; Notes)
             {
-                ApplicationArea = all;
-
+                ApplicationArea = All;
             }
         }
     }
 
     actions
     {
-        area(navigation)
+        area(Navigation)
         {
             group("&Seminar Registration")
             {
                 Caption = '&Seminar Registration';
                 action("Co&mments")
                 {
+                    ApplicationArea = All;
                     Caption = 'Co&mments';
-                    ApplicationArea = all;
                     Image = Comment;
-                    RunObject = Page "CSD Seminar Comment List";
+                    RunObject = page "CSD Seminar Comment List";
                     //RunPageLink = No.=Field(No.);
-                    RunPageLink = "No." = Field("No.");
+                    RunPageLink = "No." = field("No.");
                     //RunPageView = where("Document Type"=const(Posted Seminar Registration));
                     RunPageView = where("Table Name" = const("Posted Seminar Registration"));
-
                 }
                 action("&Charges")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                     Caption = '&Charges';
                     Image = Costs;
-                    RunObject = Page "CSD Posted Seminar Charges";
+                    RunObject = page "CSD Posted Seminar Charges";
                     //RunPageLink = Document No.=Field(No.);
-                    RunPageLink = "Document No." = Field("No.");
+                    RunPageLink = "Document No." = field("No.");
                 }
             }
         }
@@ -201,7 +198,7 @@ page 50134 "CSD Posted Seminar Reg."
         {
             action("&Navigate")
             {
-                ApplicationArea = all;
+                ApplicationArea = All;
                 Caption = '&Navigate';
                 Image = Navigate;
                 Promoted = true;
@@ -209,10 +206,10 @@ page 50134 "CSD Posted Seminar Reg."
 
                 trigger OnAction();
                 var
-                    Navigate: page Navigate;
+                    Navigate: Page Navigate;
                 begin
                     Navigate.SetDoc(Rec."Posting Date", Rec."No.");
-                    Navigate.RUN;
+                    Navigate.Run();
                 end;
             }
         }

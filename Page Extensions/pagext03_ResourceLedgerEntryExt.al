@@ -5,11 +5,10 @@ pageextension 50104 "CSD ResourceLedgerEntryExt" extends "Resource Ledger Entrie
     layout
     {
         //You typically want to show the new fields in the Ledger Entries page
-        addlast(Content)
+        addlast(content)
         {
             field("CSD Seminar No."; Rec."CSD Seminar No.")
             {
-
             }
             field("CSD Seminar Registration No."; Rec."CSD Seminar Registration No.")
             {

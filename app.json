@@ -24,6 +24,5 @@
   "runtime": "7.0",
   "features": [
     "NoImplicitWith"
-  ]
-   
+  ] 
 }

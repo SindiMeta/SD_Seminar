@@ -9,21 +9,14 @@ pageextension 50103 "CSD SourceCodeSetupExt" extends "Source Code Setup"
             group(SeminarGroup)
             {
                 Caption = 'Seminar';
-                // field("Seminar"; Rec."CSD Seminar")
-                // {
-
-                // }
-
             }
         }
         addfirst(SeminarGroup)
         {
-            field("Seminar"; Rec."CSD Seminar")
+            field(Seminar; Rec."CSD Seminar")
             {
                 ApplicationArea = All;
-
             }
-
         }
     }
 }

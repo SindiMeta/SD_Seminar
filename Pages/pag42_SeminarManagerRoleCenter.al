@@ -6,8 +6,6 @@ page 50142 "CSD Seminar Manager RoleCenter"
     Caption = 'Seminar Manager RoleCenter';
     PageType = RoleCenter;
 
-
-
     layout
     {
         area(RoleCenter)
@@ -16,31 +14,26 @@ page 50142 "CSD Seminar Manager RoleCenter"
             {
                 part(Activities; "CSD Seminar Manager Activities")
                 {
-                    ApplicationArea = all;
-
+                    ApplicationArea = All;
                 }
                 part(MySeminars; "CSD My Seminars")
                 {
-                    ApplicationArea = all;
-
+                    ApplicationArea = All;
                 }
             }
             group(Column2)
             {
                 part(MyCustomers; "My Customers")
                 {
-                    ApplicationArea = all;
-
+                    ApplicationArea = All;
                 }
                 systempart(MyNotifications; MyNotes)
                 {
-                    ApplicationArea = all;
-
+                    ApplicationArea = All;
                 }
                 part(ReportInbox; "Report Inbox Part")
                 {
-                    ApplicationArea = all;
-
+                    ApplicationArea = All;
                 }
             }
         }
@@ -55,52 +48,51 @@ page 50142 "CSD Seminar Manager RoleCenter"
                 ApplicationArea = All;
                 Caption = 'Seminar Registrations';
                 Image = List;
-                RunObject = Page "CSD Posted Seminar Reg. List";
+                RunObject = page "CSD Posted Seminar Reg. List";
                 ToolTip = 'Create seminar registrations';
             }
 
             action(Seminars)
             {
+                ApplicationArea = All;
                 Caption = 'Seminars';
-                ApplicationArea = all;
                 Image = List;
-                RunObject = Page "CSD Seminar List";
+                RunObject = page "CSD Seminar List";
                 ToolTip = 'View all seminars';
             }
 
             action(Instructors)
             {
-                ApplicationArea = all;
+                ApplicationArea = All;
                 Caption = 'Instructors';
-                RunObject = Page "Resource List";
-                RunPageView = WHERE(Type = const(Person));
+                RunObject = page "Resource List";
+                RunPageView = where(Type = const(Person));
                 ToolTip = 'View all resources registeres as persons';
             }
 
             action(Rooms)
             {
-                ApplicationArea = all;
+                ApplicationArea = All;
                 Caption = 'Rooms';
-                RunObject = Page "Resource List";
-                RunPageView = WHERE(Type = const(Machine));
+                RunObject = page "Resource List";
+                RunPageView = where(Type = const(Machine));
                 ToolTip = 'View all resources registeres as machines';
             }
 
             action("Sales Invoices")
             {
-
-                Caption = 'Sales Invoices';
                 ApplicationArea = Basic, Suite;
+                Caption = 'Sales Invoices';
                 Image = Invoice;
-                RunObject = Page "Sales Invoice List";
+                RunObject = page "Sales Invoice List";
                 ToolTip = 'Register your sales to customers';
             }
 
             action("Sales Credit Memos")
             {
-                ApplicationArea = all;
+                ApplicationArea = All;
                 Caption = 'Sales Credit Memos';
-                RunObject = Page "Sales Credit Memos";
+                RunObject = page "Sales Credit Memos";
                 ToolTip = 'Revert the financial transactions involved when your customers want to cancel a purchase';
             }
 
@@ -109,67 +101,57 @@ page 50142 "CSD Seminar Manager RoleCenter"
                 ApplicationArea = Basic, Suite;
                 Caption = 'Customers';
                 Image = Customer;
-                RunObject = Page "Customer List";
+                RunObject = page "Customer List";
                 ToolTip = 'View or edit detailed information for the customers that you trade with';
             }
-
         }
-
         area(Sections)
         {
             group("Posted Documents")
             {
-
                 Caption = 'Posted Documents';
                 Image = FiledPosted;
                 ToolTip = 'View history for sales, shipments, and inventory.';
 
                 action("Posted Seminar Registrations")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                     Caption = 'Posted Seminar Registrations';
                     Image = Timesheet;
-                    RunObject = Page "CSD Posted Seminar Reg. List";
+                    RunObject = page "CSD Posted Seminar Reg. List";
                     ToolTip = 'Open the list of posted Registrations.';
-
                 }
-
                 action("Posted Sales Invoices")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                     Caption = 'Posted Sales Invoices';
                     Image = PostedOrder;
-                    RunObject = Page "Posted Sales Invoices";
+                    RunObject = page "Posted Sales Invoices";
                     ToolTip = 'Open the list of posted sales invoices.';
                 }
-
                 action("Posted Sales Credit Memos")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                     Caption = 'Posted Sales Credit Memos';
                     Image = PostedOrder;
-                    RunObject = Page "Posted Sales Credit Memos";
+                    RunObject = page "Posted Sales Credit Memos";
                     ToolTip = 'Open the list of posted sales credit memos.';
                 }
-
-                action("Registers")
+                action(Registers)
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                     Caption = 'Seminar Registers';
                     Image = PostedShipment;
-                    RunObject = Page "CSD Seminar Registers";
+                    RunObject = page "CSD Seminar Registers";
                     ToolTip = 'Open the list of Seminar Registers.';
-
                 }
             }
-
         }
-
         area(Creation)
         {
             action(NewSeminarRegistration)
             {
-                ApplicationArea = all;
+                ApplicationArea = All;
                 Caption = 'Seminar Registration';
                 Image = NewTimesheet;
                 RunObject = page "CSD Seminar Registration";
@@ -178,19 +160,18 @@ page 50142 "CSD Seminar Manager RoleCenter"
 
             action(NewSalesInvoice)
             {
-                ApplicationArea = all;
+                ApplicationArea = All;
                 Caption = 'Sales Invoice';
                 Image = NewSalesInvoice;
                 RunObject = page "Sales Invoice";
                 RunPageMode = Create;
             }
         }
-
         area(Processing)
         {
             action(CreateInvoices)
             {
-                ApplicationArea = all;
+                ApplicationArea = All;
                 Caption = 'Create Invoices';
                 Image = CreateJobSalesInvoice;
                 RunObject = report "Create Seminar Invoices";
@@ -198,7 +179,7 @@ page 50142 "CSD Seminar Manager RoleCenter"
 
             action(Navigate)
             {
-                ApplicationArea = all;
+                ApplicationArea = All;
                 Caption = 'Navigate';
                 Image = Navigate;
                 RunObject = page Navigate;

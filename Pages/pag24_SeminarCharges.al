@@ -11,7 +11,7 @@ page 50124 "CSD Seminar Charges"
 
     layout
     {
-        area(content)
+        area(Content)
         {
             repeater(Group)
             {
@@ -54,9 +54,4 @@ page 50124 "CSD Seminar Charges"
             }
         }
     }
-
-    actions
-    {
-    }
 }
-

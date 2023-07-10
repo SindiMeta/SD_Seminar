@@ -4,15 +4,15 @@ codeunit 50101 "CSD Seminar-Post (Yes/No)"
     //   Chapter 7 - Lab 5-2
     //     - Created new codeunit
 
-    //Interacts with users and confirms that they want to post the registration. If users confirm the posting, the 
+    //Interacts with users and confirms that they want to post the registration. If users confirm the posting, the
     //codeunit runs the Seminar-Post codeunit.
 
-    TableNo = 50110;
+    TableNo = "CSD Seminar Reg. Header";
 
     trigger OnRun();
     begin
-        SeminarRegHeader.COPY(Rec);
-        Code;
+        SeminarRegHeader.Copy(Rec);
+        "Code"();
         Rec := SeminarRegHeader;
     end;
 
@@ -25,8 +25,7 @@ codeunit 50101 "CSD Seminar-Post (Yes/No)"
     begin
         if not Confirm(Text001, false) then
             exit;
-        SeminarPost.RUN(SeminarRegHeader);
-        COMMIT;
+        SeminarPost.Run(SeminarRegHeader);
+        Commit();
     end;
 }
-

@@ -31,8 +31,8 @@ table 50105 "CSD Seminar Report Selections"
         }
         field(4; "Report Name"; Text[250])
         {
-            CalcFormula = Lookup(AllObjWithCaption."Object Caption" where("Object Type" = const(Report),
-                                                                           "Object ID" = Field("Report ID")));
+            CalcFormula = lookup(AllObjWithCaption."Object Caption" where("Object Type" = const(Report),
+                                                                           "Object ID" = field("Report ID")));
             Caption = 'Report Name';
             FieldClass = FlowField;
         }
@@ -43,10 +43,6 @@ table 50105 "CSD Seminar Report Selections"
         key(Key1; Usage, Sequence)
         {
         }
-    }
-
-    fieldgroups
-    {
     }
 
     var
@@ -66,8 +62,7 @@ table 50105 "CSD Seminar Report Selections"
         SemReportSelection: Record "CSD Seminar Report Selections";
     begin
         SemReportSelection.SetRange(Usage, inUsage);
-        if SemReportSelection.FindFirst then
-            report.run(SemReportSelection."Report ID", true, false, SemRegHeader);
+        if SemReportSelection.FindFirst() then
+            Report.Run(SemReportSelection."Report ID", true, false, SemRegHeader);
     end;
 }
-

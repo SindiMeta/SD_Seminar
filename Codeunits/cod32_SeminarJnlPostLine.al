@@ -5,7 +5,6 @@ codeunit 50132 "CSD Seminar Jnl.-Post Line"
 //• Performs the posting of the Seminar Journal Line. The codeunit creates a Seminar Ledger Entry for each Seminar
 //Journal Line and creates a Seminar Register to track which entries are created during the posting
 {
-
     //This codeunit posts each line. run the checkline codeunit
     TableNo = "CSD Seminar Journal Line";
 
@@ -22,8 +21,6 @@ codeunit 50132 "CSD Seminar Jnl.-Post Line"
         NextEntryNo: Integer;
 
     procedure RunWithCheck(var SeminarJnlLine2: Record "CSD Seminar Journal Line");
-    var
-        myInt: Integer;
     begin
         SeminarJnlLine2.Reset();
         if SeminarJnlLine2.FindFirst() then begin
@@ -37,8 +34,6 @@ codeunit 50132 "CSD Seminar Jnl.-Post Line"
     end;
 
     local procedure Code()
-    var
-        myInt: Integer;
     begin
         SeminarJnlLine.Reset();
         if SeminarJnlLine.FindFirst() then begin
@@ -47,37 +42,36 @@ codeunit 50132 "CSD Seminar Jnl.-Post Line"
             if SeminarJnlLine.EmptyLine() then
                 exit;
             SeminarCheckJnlLine.RunCheck(SeminarJnlLine);
-            //In this section, if NextEntryNo is equal to 0, it locks the SeminarLegderEntry table, finds the 
-            //last entry, and assigns the value of the last entry's "Entry No." field to NextEntryNo. 
+            //In this section, if NextEntryNo is equal to 0, it locks the SeminarLegderEntry table, finds the
+            //last entry, and assigns the value of the last entry's "Entry No." field to NextEntryNo.
             //Then it increments NextEntryNo by 1.
             if NextEntryNo = 0 then begin
                 SeminarLegderEntry.LockTable();
                 if SeminarLegderEntry.FindLast() then
                     NextEntryNo := SeminarLegderEntry."Entry No.";
                 NextEntryNo := NextEntryNo + 1;
-                //In this section, if the "No." field of SeminarRegister is equal to 0, it locks the table, checks if it's the last entry 
-                // or if the "To Entry No." field is not equal to 0. If either condition is true, it initializes a new record, assigns values 
-                // to the relevant fields, and inserts the record. 
+                //In this section, if the "No." field of SeminarRegister is equal to 0, it locks the table, checks if it's the last entry
+                // or if the "To Entry No." field is not equal to 0. If either condition is true, it initializes a new record, assigns values
+                // to the relevant fields, and inserts the record.
                 // After that, it sets the "To Entry No." field of SeminarRegister to the value of NextEntryNo and modifies the record.
                 if SeminarRegister."No." = 0 then begin
-                    SeminarRegister.LockTable;
-                    if (not SeminarRegister.FindLast) or
+                    SeminarRegister.LockTable();
+                    if (not SeminarRegister.FindLast()) or
                     (SeminarRegister."To Entry No." <> 0) then begin
-                        SeminarRegister.INIT;
+                        SeminarRegister.Init();
                         SeminarRegister."No." := SeminarRegister."No." + 1;
                         SeminarRegister."From Entry No." := NextEntryNo;
                         SeminarRegister."To Entry No." := NextEntryNo;
-                        SeminarRegister."Creation Date" := TODAY;
+                        SeminarRegister."Creation Date" := Today;
                         SeminarRegister."Source Code" := SeminarJnlLine."Source Code";
                         SeminarRegister."Journal Batch Name" :=
                         SeminarJnlLine."Journal Batch Name";
-                        SeminarRegister."User ID" := USERID;
-                        SeminarRegister.Insert;
+                        SeminarRegister."User ID" := UserId;
+                        SeminarRegister.Insert();
                     end;
-
                 end;
                 SeminarRegister."To Entry No." := NextEntryNo;
-                SeminarRegister.Modify;
+                SeminarRegister.Modify();
             end;
             //Create a new SeminarLedgerEntry record, populate the fields from the
             // SeminarJnlLine record, set the Entry No. field to the NextEntryNo
@@ -122,11 +116,7 @@ codeunit 50132 "CSD Seminar Jnl.-Post Line"
             SeminarJnlLine."Posting No. Series";
             SeminarLegderEntry."Entry No." := NextEntryNo;
             NextEntryNo += 1;
-            SeminarLegderEntry.Insert;
-
-
-
+            SeminarLegderEntry.Insert();
         end;
     end;
-
 }

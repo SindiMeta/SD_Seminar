@@ -7,16 +7,15 @@ page 50113 "CSD Seminar Registration List"
     // Added Action Post
 
     Caption = 'Seminar Registration List';
-    CardPageID = "CSD Seminar Registration";
+    CardPageId = "CSD Seminar Registration";
     Editable = false;
     PageType = List;
     SourceTable = "CSD Seminar Reg. Header";
     UsageCategory = lists;
 
-
     layout
     {
-        area(content)
+        area(Content)
         {
             repeater(Group)
             {
@@ -54,65 +53,62 @@ page 50113 "CSD Seminar Registration List"
                 }
             }
         }
-        area(factboxes)
+        area(FactBoxes)
         {
             systempart("Links"; Links)
             {
-                ApplicationArea = all;
-
+                ApplicationArea = All;
             }
             systempart("Notes"; Notes)
             {
-                ApplicationArea = all;
-
-
+                ApplicationArea = All;
             }
         }
     }
 
     actions
     {
-        area(navigation)
+        area(Navigation)
         {
             group("&Seminar Registration")
             {
                 Caption = '&Seminar Registration';
                 action("Co&mments")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                     Caption = 'Co&mments';
                     Image = Comment;
-                    RunObject = Page 50106;
-                    RunPageLink = "No." = Field("No.");
-                    RunPageView = where("Table Name" = Const("Seminar Registration"));
+                    RunObject = page "CSD Seminar Comment Sheet";
+                    RunPageLink = "No." = field("No.");
+                    RunPageView = where("Table Name" = const("Seminar Registration"));
                 }
                 action("&Charges")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                     Caption = '&Charges';
                     Image = Costs;
-                    RunObject = Page 50124;
-                    RunPageLink = "Document No." = Field("No.");
+                    RunObject = page "CSD Seminar Charges";
+                    RunPageLink = "Document No." = field("No.");
                 }
                 action("&Post")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                     Caption = '&Post';
                     Image = PostDocument;
                     Promoted = true;
-                    PromotedIsBig = true;
                     PromotedCategory = Process;
-                    ShortcutKey = F9;
+                    PromotedIsBig = true;
                     RunObject = codeunit "CSD Seminar-Post (Yes/No)";
+                    ShortcutKey = F9;
                 }
                 action("&Print")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                     Caption = '&Print';
                     Image = Print;
                     Promoted = true;
-                    PromotedIsBig = true;
                     PromotedCategory = Process;
+                    PromotedIsBig = true;
                     trigger OnAction();
                     var
                         SeminarReportSelection: Record "CSD Seminar Report Selections";
@@ -125,4 +121,3 @@ page 50113 "CSD Seminar Registration List"
         }
     }
 }
-

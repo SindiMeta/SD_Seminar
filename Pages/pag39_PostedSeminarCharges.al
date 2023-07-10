@@ -12,48 +12,47 @@ page 50139 "CSD Posted Seminar Charges"
 
     layout
     {
-        area(content)
+        area(Content)
         {
             repeater(Group)
             {
                 field("No."; Rec."No.")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field(Description; Rec.Description)
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field(Quantity; Rec.Quantity)
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Unit of Measure Code"; Rec."Unit of Measure Code")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Bill-to Customer No."; Rec."Bill-to Customer No.")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Gen. Prod. Posting Group"; Rec."Gen. Prod. Posting Group")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Unit Price"; Rec."Unit Price")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Total Price"; Rec."Total Price")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("To Invoice"; Rec."To Invoice")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
             }
         }
     }
 }
-

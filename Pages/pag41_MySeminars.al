@@ -1,8 +1,8 @@
 page 50141 "CSD My Seminars"
 {
+    Caption = 'My Seminars';
     PageType = ListPart;
     SourceTable = "“CSD My Seminars";
-    Caption = 'My Seminars';
 
     layout
     {
@@ -13,19 +13,18 @@ page 50141 "CSD My Seminars"
                 field("Seminar No."; Rec."Seminar No.")
                 {
                     ApplicationArea = All;
-
                 }
                 field(Name; Seminar.Name)
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field(Duration; Seminar."Seminar Duration")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field(Price; Seminar."Seminar Price")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
             }
         }
@@ -40,7 +39,7 @@ page 50141 "CSD My Seminars"
                 Image = Card;
                 trigger OnAction()
                 begin
-                    OpenSeminarCard;
+                    OpenSeminarCard();
                 end;
             }
         }
@@ -51,12 +50,12 @@ page 50141 "CSD My Seminars"
 
     trigger OnOpenPage();
     begin
-        Rec.SetRange("User Id", UserId);
+        Rec.SetRange("User ID", UserId);
     end;
 
     trigger OnAfterGetRecord();
     begin
-        if Seminar.get(Rec."Seminar No.") then;
+        if Seminar.Get(Rec."Seminar No.") then;
     end;
 
     trigger OnNewRecord(BelowxRec: Boolean);

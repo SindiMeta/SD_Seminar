@@ -8,10 +8,9 @@ table 50110 "CSD Seminar Reg. Header"
 // - Added new field "No. Printed
 
 {
-
     Caption = 'Seminar Registration Header';
-    LookupPageId = "CSD Seminar Registration List";
     DrillDownPageId = "CSD Seminar Registration List";
+    LookupPageId = "CSD Seminar Registration List";
 
     fields
     {
@@ -26,8 +25,8 @@ table 50110 "CSD Seminar Reg. Header"
                 //kontrollon nese e para ndryshe nga vlera e vjeter e ruajtur ne rekord
                 if "No." <> xRec."No." then begin
                     //merr rekordin nga CSD Seminar Setup dhe e ruan ne variabel
-                    SeminarSetup.GET;
-                    //nese seria e nr ne Seminar Nos. field e rekordit te seminar setup lejon futjen manuale te nr 
+                    SeminarSetup.Get();
+                    //nese seria e nr ne Seminar Nos. field e rekordit te seminar setup lejon futjen manuale te nr
                     NoSeriesMgt.TestManual(SeminarSetup."Seminar Registration Nos.");
                     "No. Series" := '';
                 end;
@@ -35,7 +34,6 @@ table 50110 "CSD Seminar Reg. Header"
         }
         field(2; "Starting Date"; Date)
         {
-
             Caption = 'Starting Date';
             DataClassification = AccountData;
             //Nëse data e fillimit ndryshohet, ajo kontrollon dhe zbaton që statusi të jetë vendosur në "Planifikimi"
@@ -48,8 +46,8 @@ table 50110 "CSD Seminar Reg. Header"
         field(3; "Seminar No."; Code[20])
         {
             Caption = 'Seminar No.';
-            TableRelation = "CSD Seminar";
             DataClassification = AccountData;
+            TableRelation = "CSD Seminar";
             //te kryeje validime dhe te plotesoje fushat kur modifikohet seminar no.
             //to understand how it makes sure that you cannot change the Seminar No. if there are participants in the seminar.
             //??????????????????????????????
@@ -57,11 +55,11 @@ table 50110 "CSD Seminar Reg. Header"
             trigger OnValidate();
             begin
                 if "Seminar No." <> xRec."Seminar No." then begin
-                    SeminarRegLine.Reset;
+                    SeminarRegLine.Reset();
                     SeminarRegLine.SetRange("Document No.", "No.");
                     SeminarRegLine.SetRange(Registered, true);
                     if not SeminarRegLine.IsEmpty then
-                        ERROR(
+                        Error(
                           Text002,
                           FieldCaption("Seminar No."),
                           SeminarRegLine.TableCaption,
@@ -99,8 +97,8 @@ table 50110 "CSD Seminar Reg. Header"
         field(5; "Instructor Resource No."; Code[20])
         {
             Caption = 'Instructor Resource No.';
-            TableRelation = Resource where(Type = const(Person));
             DataClassification = AccountData;
+            TableRelation = Resource where(Type = const(Person));
 
             trigger OnValidate();
             begin
@@ -109,8 +107,8 @@ table 50110 "CSD Seminar Reg. Header"
         }
         field(6; "Instructor Name"; Text[100])
         {
-            Caption = 'Instructor Name';
             CalcFormula = lookup(Resource.Name where("No." = field("Instructor Resource No."), Type = const(Person)));
+            Caption = 'Instructor Name';
             Editable = false;
             //e nxjerre vleren ne menyre dinamike
             FieldClass = FlowField;
@@ -118,15 +116,15 @@ table 50110 "CSD Seminar Reg. Header"
         field(7; Status; Option)
         {
             Caption = 'Status';
+            DataClassification = AccountData;
             OptionCaption = 'Planning,Registration,Closed,Canceled';
             OptionMembers = Planning,Registration,Closed,Canceled;
-            DataClassification = AccountData;
         }
         field(8; Duration; Decimal)
         {
             Caption = 'Duration';
-            DecimalPlaces = 0 : 1;
             DataClassification = AccountData;
+            DecimalPlaces = 0 : 1;
         }
         field(9; "Maximum Participants"; Integer)
         {
@@ -142,8 +140,8 @@ table 50110 "CSD Seminar Reg. Header"
         field(11; "Room Resource No."; Code[20])
         {
             Caption = 'Room Resource No.';
-            TableRelation = Resource where(Type = const(Machine));
             DataClassification = AccountData;
+            TableRelation = Resource where(Type = const(Machine));
 
             trigger OnValidate();
             begin
@@ -156,7 +154,7 @@ table 50110 "CSD Seminar Reg. Header"
                     "Room County" := '';
                     "Room Country/Reg. Code" := '';
                 end else begin
-                    SeminarRoom.GET("Room Resource No.");
+                    SeminarRoom.Get("Room Resource No.");
                     "Room Name" := SeminarRoom.Name;
                     "Room Address" := SeminarRoom.Address;
                     "Room Address 2" := SeminarRoom."Address 2";
@@ -165,10 +163,10 @@ table 50110 "CSD Seminar Reg. Header"
                     "Room County" := SeminarRoom.County;
                     "Room Country/Reg. Code" := SeminarRoom."Country/Region Code";
                     //checks whether the seminar can register more participants if the room has more capacity than the maximum that is defined by the seminar master record.
-                    if (CurrFieldNo <> 0) then begin
+                    if (CurrFieldNo <> 0) then
                         if (SeminarRoom."CSD Maximum Participants" <> 0) and
                            (SeminarRoom."CSD Maximum Participants" < "Maximum Participants")
-                        then begin
+                        then
                             if Confirm(Text004, true,
                                  "Maximum Participants",
                                  SeminarRoom."CSD Maximum Participants",
@@ -177,8 +175,6 @@ table 50110 "CSD Seminar Reg. Header"
                                  SeminarRoom."CSD Maximum Participants")
                             then
                                 "Maximum Participants" := SeminarRoom."CSD Maximum Participants";
-                        end;
-                    end;
                 end;
             end;
         }
@@ -200,9 +196,9 @@ table 50110 "CSD Seminar Reg. Header"
         field(15; "Room Post Code"; Code[20])
         {
             Caption = 'Room Post Code';
+            DataClassification = AccountData;
             TableRelation = "Post Code".Code;
             ValidateTableRelation = false;
-            DataClassification = AccountData;
 
             trigger OnValidate();
             begin
@@ -223,8 +219,8 @@ table 50110 "CSD Seminar Reg. Header"
         field(17; "Room Country/Reg. Code"; Code[10])
         {
             Caption = 'Room Country/Reg';
-            TableRelation = "Country/Region";
             DataClassification = AccountData;
+            TableRelation = "Country/Region";
         }
         field(18; "Room County"; Text[30])
         {
@@ -233,8 +229,8 @@ table 50110 "CSD Seminar Reg. Header"
         }
         field(19; "Seminar Price"; Decimal)
         {
-            Caption = 'Seminar Price';
             AutoFormatType = 1;
+            Caption = 'Seminar Price';
             //DataClassification = AccountData;
 
             trigger OnValidate();
@@ -242,7 +238,7 @@ table 50110 "CSD Seminar Reg. Header"
                 if ("Seminar Price" <> xRec."Seminar Price") and
                    (Status <> Status::Canceled)
                 then begin
-                    SeminarRegLine.Reset;
+                    SeminarRegLine.Reset();
                     SeminarRegLine.SetRange("Document No.", "No.");
                     SeminarRegLine.SetRange(Registered, false);
                     if SeminarRegLine.FindSet(false, false) then
@@ -251,10 +247,10 @@ table 50110 "CSD Seminar Reg. Header"
                              SeminarRegLine.TableCaption)
                         then begin
                             repeat
-                                SeminarRegLine.VALIDATE("Seminar Price", "Seminar Price");
-                                SeminarRegLine.modify;
-                            until SeminarRegLine.NEXT = 0;
-                            modify;
+                                SeminarRegLine.Validate("Seminar Price", "Seminar Price");
+                                SeminarRegLine.Modify();
+                            until SeminarRegLine.Next() = 0;
+                            Modify();
                         end;
                 end;
             end;
@@ -262,20 +258,20 @@ table 50110 "CSD Seminar Reg. Header"
         field(20; "Gen. Prod. Posting Group"; Code[10])
         {
             Caption = 'Gen. Prod. Posting Group';
-            TableRelation = "Gen. Product Posting Group".Code;
             DataClassification = AccountData;
+            TableRelation = "Gen. Product Posting Group".Code;
         }
         field(21; "VAT Prod. Posting Group"; Code[10])
         {
             Caption = 'VAT Prod. Posting Group';
-            TableRelation = "VAT Product Posting Group".Code;
             DataClassification = AccountData;
+            TableRelation = "VAT Product Posting Group".Code;
         }
         field(22; Comment; Boolean)
         {
-            Caption = 'Comment';
             CalcFormula = exist("CSD Seminar Comment Line" where("Table Name" = const("Seminar Registration"),
             "No." = field("No.")));
+            Caption = 'Comment';
             Editable = false;
             FieldClass = FlowField;
         }
@@ -292,21 +288,21 @@ table 50110 "CSD Seminar Reg. Header"
         field(25; "Reason Code"; Code[10])
         {
             Caption = 'Reason Code';
-            TableRelation = "Reason Code".Code;
             DataClassification = AccountData;
+            TableRelation = "Reason Code".Code;
         }
         field(26; "No. Series"; Code[10])
         {
             Caption = 'No. Series';
+            DataClassification = AccountData;
             Editable = false;
             TableRelation = "No. Series".Code;
-            DataClassification = AccountData;
         }
         field(27; "Posting No. Series"; Code[10])
         {
             Caption = 'Posting No. Series';
-            TableRelation = "No. Series".Code;
             DataClassification = AccountData;
+            TableRelation = "No. Series".Code;
 
             trigger OnLookup();
             begin
@@ -314,13 +310,12 @@ table 50110 "CSD Seminar Reg. Header"
                 if SeminarRegHeader.FindFirst() then begin
                     //with SeminarRegHeader do begin
                     SeminarRegHeader := Rec;
-                    SeminarSetup.GET;
+                    SeminarSetup.Get();
                     SeminarSetup.TestField("Seminar Registration Nos.");
                     SeminarSetup.TestField("Posted Seminar Reg. Nos.");
                     if NoSeriesMgt.LookupSeries(SeminarSetup."Posted Seminar Reg. Nos.", "Posting No. Series")
-                    then begin
-                        VALIDATE("Posting No. Series");
-                    end;
+                    then
+                        Validate("Posting No. Series");
                     Rec := SeminarRegHeader;
                 end;
             end;
@@ -328,7 +323,7 @@ table 50110 "CSD Seminar Reg. Header"
             trigger OnValidate();
             begin
                 if "Posting No. Series" <> '' then begin
-                    SeminarSetup.GET;
+                    SeminarSetup.Get();
                     SeminarSetup.TestField("Seminar Registration Nos.");
                     SeminarSetup.TestField("Posted Seminar Reg. Nos.");
                     NoSeriesMgt.TestSeries(SeminarSetup."Posted Seminar Reg. Nos.", "Posting No. Series");
@@ -340,15 +335,13 @@ table 50110 "CSD Seminar Reg. Header"
         {
             Caption = 'Posting No.';
             DataClassification = AccountData;
-
         }
         field(40; "No. Printed"; Integer)
         {
             Caption = 'No. Printed';
-            Editable = false;
             DataClassification = AccountData;
+            Editable = false;
         }
-
     }
 
     keys
@@ -358,27 +351,27 @@ table 50110 "CSD Seminar Reg. Header"
         }
         key(Key2; "Room Resource No.")
         {
-            //duke mundësuar llogaritje ose operacione efikase që përfshijnë kohëzgjatjen e seminareve të lidhura 
+            //duke mundësuar llogaritje ose operacione efikase që përfshijnë kohëzgjatjen e seminareve të lidhura
             //me një burim të caktuar dhome.
             SumIndexFields = Duration;
         }
     }
 
     var
-        PostCode: Record "Post Code";
         Seminar: Record "CSD Seminar";
-        SeminarCommentLine: Record "CSD Seminar Comment Line";
         SeminarCharge: Record "CSD Seminar Charge";
+        SeminarCommentLine: Record "CSD Seminar Comment Line";
         SeminarRegHeader: Record "CSD Seminar Reg. Header";
         SeminarRegLine: Record "CSD Seminar Registration Line";
-        SeminarRoom: Record Resource;
         SeminarSetup: Record "CSD Seminar Setup";
+        PostCode: Record "Post Code";
+        SeminarRoom: Record Resource;
         NoSeriesMgt: Codeunit NoSeriesManagement;
-        Text001: TextConst ENU = 'You cannot delete the Seminar Registration, because there is at least one %1 where %2=%3.';
-        Text002: TextConst ENU = 'You cannot change the %1, because there is at least one %2 with %3=%4.';
         Text004: Label 'This Seminar is for %1 participants. \The selected Room has a maximum of %2 participants \Do you want to change %3 for the Seminar from %4 to %5?';
         Text005: Label 'Should the new %1 be copied to all %2 that are not yet invoiced?';
         Text006: Label 'You cannot delete the Seminar Registration, because there is at least one %1.';
+        Text001: TextConst ENU = 'You cannot delete the Seminar Registration, because there is at least one %1 where %2=%3.';
+        Text002: TextConst ENU = 'You cannot change the %1, because there is at least one %2 with %3=%4.';
 
     //Në përgjithësi, ky aktivizues siguron që kur një rekord fshihet, ai kryen vërtetimet e nevojshme dhe fshin të dhënat shoqëruese në tabela të tjera
     //such as registered seminar lines, seminar charges, and seminar comment lines
@@ -386,35 +379,35 @@ table 50110 "CSD Seminar Reg. Header"
     begin
         if (CurrFieldNo > 0) then
             TestField(Status, Status::Canceled);
-        SeminarRegLine.RESET;
-        SeminarRegLine.SETRANGE("Document No.", "No.");
-        SeminarRegLine.SETRANGE(Registered, true);
-        if SeminarRegLine.FIND('-') then
-            ERROR(
+        SeminarRegLine.Reset();
+        SeminarRegLine.SetRange("Document No.", "No.");
+        SeminarRegLine.SetRange(Registered, true);
+        if SeminarRegLine.Find('-') then
+            Error(
               Text001,
               SeminarRegLine.TableCaption,
               SeminarRegLine.FieldCaption(Registered),
               true);
-        SeminarRegLine.SETRANGE(Registered);
-        SeminarRegLine.deleteALL(true);
+        SeminarRegLine.SetRange(Registered);
+        SeminarRegLine.DeleteAll(true);
 
-        SeminarCharge.RESET;
-        SeminarCharge.SETRANGE("Document No.", "No.");
-        if not SeminarCharge.ISEMPTY then
-            ERROR(Text006, SeminarCharge.TableCaption);
+        SeminarCharge.Reset();
+        SeminarCharge.SetRange("Document No.", "No.");
+        if not SeminarCharge.IsEmpty then
+            Error(Text006, SeminarCharge.TableCaption);
 
-        SeminarCommentLine.RESET;
-        SeminarCommentLine.SETRANGE("Table Name", SeminarCommentLine."Table Name"::"Seminar Registration");
-        SeminarCommentLine.SETRANGE("No.", "No.");
-        SeminarCommentLine.deleteALL;
+        SeminarCommentLine.Reset();
+        SeminarCommentLine.SetRange("Table Name", SeminarCommentLine."Table Name"::"Seminar Registration");
+        SeminarCommentLine.SetRange("No.", "No.");
+        SeminarCommentLine.DeleteAll();
     end;
     //executed when insert new values
-    //Overall, the trigger initializes fields, 
+    //Overall, the trigger initializes fields,
     //retrieves data from related tables, sets default values, and includes a custom modification specific to Lab 8 1-1 exercise.
     trigger OnInsert();
     begin
         if "No." = '' then begin
-            SeminarSetup.GET;
+            SeminarSetup.Get();
             SeminarSetup.TestField("Seminar Registration Nos.");
             NoSeriesMgt.InitSeries(SeminarSetup."Seminar Registration Nos.", xRec."No. Series", 0D, "No.", "No. Series");
         end;
@@ -426,18 +419,17 @@ table 50110 "CSD Seminar Reg. Header"
             then
                 Validate("Seminar No.", GetRangeMin("Seminar No."));
         // << Lab 8 1-1
-
     end;
-    //In summary, the InitRecord procedure sets default values for the "Posting Date" and "Document Date" fields, retrieves 
+    //In summary, the InitRecord procedure sets default values for the "Posting Date" and "Document Date" fields, retrieves
     //the Seminar Setup record, and sets the default series for a specific series code using the value from the Seminar Setup record.
     local procedure InitRecord()
 
     begin
 
         if "Posting Date" = 0D then
-            "Posting Date" := WORKDATE;
-        "Document Date" := WORKDATE;
-        SeminarSetup.GET;
+            "Posting Date" := WorkDate();
+        "Document Date" := WorkDate();
+        SeminarSetup.Get();
         NoSeriesMgt.SetDefaultSeries("Posting No. Series",
         SeminarSetup."Posted Seminar Reg. Nos.");
     end;
@@ -449,10 +441,10 @@ table 50110 "CSD Seminar Reg. Header"
             ;
             //with SeminarRegHeader do begin
             SeminarRegHeader := Rec;
-            SeminarSetup.GET;
+            SeminarSetup.Get();
             SeminarSetup.TestField("Seminar Registration Nos.");
             if NoSeriesMgt.SelectSeries(SeminarSetup."Seminar Registration Nos.", OldSeminarRegHeader."No. Series", "No. Series") then begin
-                SeminarSetup.GET;
+                SeminarSetup.Get();
                 SeminarSetup.TestField("Seminar Registration Nos.");
                 NoSeriesMgt.SetSeries("No.");
                 Rec := SeminarRegHeader;
@@ -462,4 +454,3 @@ table 50110 "CSD Seminar Reg. Header"
     end;
     //end;
 }
-

@@ -12,60 +12,59 @@ page 50135 "CSD Post Seminar Reg. Subpage"
 
     layout
     {
-        area(content)
+        area(Content)
         {
             repeater(Group)
             {
                 field("Bill-to Customer No."; Rec."Bill-to Customer No.")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Participant Contact No."; Rec."Participant Contact No.")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Participant Name"; Rec."Participant Name")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field(Participated; Rec.Participated)
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Registration Date"; Rec."Registration Date")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Confirmation Date"; Rec."Confirmation Date")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("To Invoice"; Rec."To Invoice")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field(Registered; Rec.Registered)
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Seminar Price"; Rec."Seminar Price")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Line Discount %"; Rec."Line Discount %")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Line Discount Amount"; Rec."Line Discount Amount")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field(Amount; Rec.Amount)
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
             }
         }
     }
 }
-

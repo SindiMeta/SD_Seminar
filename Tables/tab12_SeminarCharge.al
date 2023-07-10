@@ -10,22 +10,21 @@ table 50112 "CSD Seminar Charge"
         field(1; "Document No."; Code[20])
         {
             Caption = 'Document No.';
+            DataClassification = AccountData;
             NotBlank = true;
             TableRelation = "CSD Seminar Reg. Header";
-            DataClassification = AccountData;
         }
         field(2; "Line No."; Integer)
         {
             Caption = 'Line No.';
             DataClassification = AccountData;
-
         }
         field(3; Type; Option)
         {
             Caption = 'Type';
+            DataClassification = AccountData;
             OptionCaption = 'Resource,G/L Account';
             OptionMembers = Resource,"G/L Account";
-            DataClassification = AccountData;
             //Ai ruan vlerën aktuale të fushës "Type" në një variabël të quajtur "OldType".
             //Ai thërret procedurën "Init" për të inicializuar fushat e regjistrimit në vlerat e tyre të paracaktuara.
             //Ai cakton vlerën e ruajtur të "OldType" përsëri në fushën "Type", duke rivendosur vlerën e saj origjinale.
@@ -36,7 +35,7 @@ table 50112 "CSD Seminar Charge"
             begin
                 if Type <> xRec.Type then begin
                     OldType := Type;
-                    Init;
+                    Init();
                     Type := OldType;
                 end;
             end;
@@ -47,7 +46,7 @@ table 50112 "CSD Seminar Charge"
             TableRelation = if (Type = const(Resource)) Resource."No."
             else
             if (Type = const("G/L Account")) "G/L Account"."No.";
-            //Ky aktivizues është përgjegjës për plotësimin e fushave përkatëse bazuar në "Lloji" i zgjedhur në regjistrim, pavarësisht nëse është një burim ose një llogari G/L. 
+            //Ky aktivizues është përgjegjës për plotësimin e fushave përkatëse bazuar në "Lloji" i zgjedhur në regjistrim, pavarësisht nëse është një burim ose një llogari G/L.
             //Kryen vërtetime dhe kopjon vlerat e fushës në përputhje me rrethanat për të siguruar konsistencën dhe saktësinë e të dhënave.
             trigger OnValidate();
             begin
@@ -86,8 +85,8 @@ table 50112 "CSD Seminar Charge"
         field(6; Quantity; Decimal)
         {
             Caption = 'Quantity';
-            DecimalPlaces = 0 : 5;
             DataClassification = AccountData;
+            DecimalPlaces = 0 : 5;
 
             trigger OnValidate();
             begin
@@ -96,10 +95,10 @@ table 50112 "CSD Seminar Charge"
         }
         field(7; "Unit Price"; Decimal)
         {
-            Caption = 'Unit Price';
             AutoFormatType = 2;
-            MinValue = 0;
+            Caption = 'Unit Price';
             DataClassification = AccountData;
+            MinValue = 0;
 
             trigger OnValidate();
             begin
@@ -108,10 +107,10 @@ table 50112 "CSD Seminar Charge"
         }
         field(8; "Total Price"; Decimal)
         {
-            Caption = 'Total Price';
             AutoFormatType = 1;
-            Editable = false;
+            Caption = 'Total Price';
             DataClassification = AccountData;
+            Editable = false;
 
             trigger OnValidate();
             begin
@@ -124,22 +123,22 @@ table 50112 "CSD Seminar Charge"
         field(9; "To Invoice"; Boolean)
         {
             Caption = 'To Invoice';
-            InitValue = true;
             DataClassification = AccountData;
+            InitValue = true;
         }
         field(10; "Bill-to Customer No."; Code[20])
         {
             Caption = 'Bill-to Customer No.';
-            TableRelation = Customer."No.";
             DataClassification = AccountData;
+            TableRelation = Customer."No.";
         }
         field(11; "Unit of Measure Code"; Code[10])
         {
             Caption = 'Unit of Measure Code';
-            TableRelation = if (Type = const(Resource)) "Resource Unit of Measure".Code where("Resource No." = Field("No."))
+            DataClassification = AccountData;
+            TableRelation = if (Type = const(Resource)) "Resource Unit of Measure".Code where("Resource No." = field("No."))
             else
             "Unit of Measure".Code;
-            DataClassification = AccountData;
 
             trigger OnValidate();
             begin
@@ -147,21 +146,18 @@ table 50112 "CSD Seminar Charge"
                     Type::Resource:
                         begin
                             Resource.Get("No.");
-                            if "Unit of Measure Code" = '' then begin
+                            if "Unit of Measure Code" = '' then
                                 "Unit of Measure Code" := Resource."Base Unit of Measure";
-                            end;
                             ResourceUofM.Get("No.", "Unit of Measure Code");
                             "Qty. per Unit of Measure" := ResourceUofM."Qty. per Unit of Measure";
                             "Total Price" := Round(Resource."Unit Price" * "Qty. per Unit of Measure");
                         end;
                     Type::"G/L Account":
-                        begin
-                            "Qty. per Unit of Measure" := 1;
-                        end;
+
+                        "Qty. per Unit of Measure" := 1;
                 end;
-                if CurrFieldNo = FieldNO("Unit of Measure Code") then begin
+                if CurrFieldNo = FieldNo("Unit of Measure Code") then
                     Validate("Unit Price");
-                end;
             end;
         }
         field(12; "Gen. Prod. Posting Group"; Code[10])
@@ -172,8 +168,8 @@ table 50112 "CSD Seminar Charge"
         field(13; "VAT Prod. Posting Group"; Code[10])
         {
             Caption = 'VAT Prod. Posting Group';
-            TableRelation = "VAT Product Posting Group".Code;
             DataClassification = AccountData;
+            TableRelation = "VAT Product Posting Group".Code;
         }
         field(14; "Qty. per Unit of Measure"; Decimal)
         {
@@ -183,8 +179,8 @@ table 50112 "CSD Seminar Charge"
         field(15; Registered; Boolean)
         {
             Caption = 'Registered';
-            Editable = false;
             DataClassification = AccountData;
+            Editable = false;
         }
     }
 
@@ -193,10 +189,6 @@ table 50112 "CSD Seminar Charge"
         key(Key1; "Document No.", "Line No.")
         {
         }
-    }
-
-    fieldgroups
-    {
     }
 
     trigger OnDelete();
@@ -210,9 +202,8 @@ table 50112 "CSD Seminar Charge"
     end;
 
     var
+        SeminarRegistrationHeader: Record "CSD Seminar Reg. Header";
         GLAccount: Record "G/L Account";
         Resource: Record Resource;
         ResourceUofM: Record "Resource Unit of Measure";
-        SeminarRegistrationHeader: Record "CSD Seminar Reg. Header";
 }
-

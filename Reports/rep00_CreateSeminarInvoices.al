@@ -1,34 +1,32 @@
 report 50100 "Create Seminar Invoices"
 {
+    ApplicationArea = All;
     // CSD1.00 - 2018-01-01 - D. E. Veloper
     //   Chapter 9 - Lab 2
     //     - Created new report
 
     Caption = 'Create Seminar Invoices';
-    UsageCategory = ReportsAndAnalysis;
     ProcessingOnly = true;
-    ApplicationArea = All;
-
+    UsageCategory = ReportsAndAnalysis;
 
     dataset
     {
         dataitem("Seminar Ledger Entry"; "CSD Seminar Ledger Entry")
         {
-
             DataItemTableView = sorting("Bill-to Customer No.", "Seminar No.");
             trigger OnAfterGetRecord();
             begin
                 if "Bill-to Customer No." <> Customer."No." then
                     Customer.Get("Bill-to Customer No.");
 
-                if Customer.Blocked in [Customer.Blocked::All, Customer.Blocked::Invoice] then begin
-                    NoofSalesInvErrors := NoofSalesInvErrors + 1;
-                end else begin
+                if Customer.Blocked in [Customer.Blocked::All, Customer.Blocked::Invoice] then
+                    NoofSalesInvErrors := NoofSalesInvErrors + 1
+                else begin
                     if "Seminar Ledger Entry"."Bill-to Customer No." <> SalesHeader."Bill-to Customer No." then begin
                         Window.Update(1, "Bill-to Customer No.");
                         if SalesHeader."No." <> '' then
-                            FinalizeSalesInvoiceHeader;
-                        InsertSalesInvoiceHeader;
+                            FinalizeSalesInvoiceHeader();
+                        InsertSalesInvoiceHeader();
                     end;
                     Window.Update(2, "Seminar Registration No.");
 
@@ -47,8 +45,8 @@ report 50100 "Create Seminar Invoices"
                             end;
                     end;
 
-                    SalesLine."document Type" := SalesHeader."document Type";
-                    SalesLine."document No." := SalesHeader."No.";
+                    SalesLine."Document Type" := SalesHeader."Document Type";
+                    SalesLine."Document No." := SalesHeader."No.";
                     SalesLine."Line No." := NextLineNo;
                     SalesLine.Validate("No.");
                     Seminar.Get("Seminar No.");
@@ -61,24 +59,24 @@ report 50100 "Create Seminar Invoices"
                     if SalesHeader."Currency Code" <> '' then begin
                         SalesHeader.TestField("Currency Factor");
                         SalesLine."Unit Price" :=
-                          ROUND(
-                            CurrencyExchRate.ExchangeAmtLCYTofCY(
-                            WorkDate, SalesHeader."Currency Code",
+                          Round(
+                            CurrencyExchRate.ExchangeAmtLCYToFCY(
+                            WorkDate(), SalesHeader."Currency Code",
                             SalesLine."Unit Price", SalesHeader."Currency Factor"));
                     end;
                     SalesLine.Validate(Quantity, Quantity);
-                    SalesLine.Insert;
+                    SalesLine.Insert();
                     NextLineNo := NextLineNo + 10000;
                 end;
             end;
 
             trigger OnPostDataItem();
             begin
-                Window.Close;
-                if SalesHeader."No." = '' then begin
-                    Message(Text007);
-                end else begin
-                    FinalizeSalesInvoiceHeader;
+                Window.Close();
+                if SalesHeader."No." = '' then
+                    Message(Text007)
+                else begin
+                    FinalizeSalesInvoiceHeader();
                     if NoofSalesInvErrors = 0 then
                         Message(
                           Text005,
@@ -93,9 +91,9 @@ report 50100 "Create Seminar Invoices"
             trigger OnPreDataItem();
             begin
                 if PostingDateReq = 0D then
-                    ERROR(Text000);
+                    Error(Text000);
                 if docDateReq = 0D then
-                    ERROR(Text001);
+                    Error(Text001);
 
                 Window.Open(
                   Text002 +
@@ -107,10 +105,9 @@ report 50100 "Create Seminar Invoices"
 
     requestpage
     {
-
         layout
         {
-            area(content)
+            area(Content)
             {
                 group(Options)
                 {
@@ -135,17 +132,13 @@ report 50100 "Create Seminar Invoices"
             }
         }
 
-        actions
-        {
-        }
-
         trigger OnOpenPage();
         begin
             if PostingDateReq = 0D then
-                PostingDateReq := WorkDate;
+                PostingDateReq := WorkDate();
             if docDateReq = 0D then
-                docDateReq := WorkDate;
-            SalesSetup.Get;
+                docDateReq := WorkDate();
+            SalesSetup.Get();
             CalcInvoiceDiscount := SalesSetup."Calc. Inv. Discount";
         end;
     }
@@ -155,22 +148,23 @@ report 50100 "Create Seminar Invoices"
     }
 
     var
+        Seminar: Record "CSD Seminar";
         CurrencyExchRate: Record "Currency Exchange Rate";
         Customer: Record Customer;
-        GLSetup: Record "General Ledger Setup";
+        SalesSetup: Record "Sales & Receivables Setup";
         SalesHeader: Record "Sales Header";
         SalesLine: Record "Sales Line";
-        SalesSetup: Record "Sales & Receivables Setup";
         SalesCalcDiscount: Codeunit "Sales-Calc. Discount";
         SalesPost: Codeunit "Sales-Post";
         CalcInvoiceDiscount: Boolean;
         PostInvoices: Boolean;
-        NextLineNo: Integer;
-        NoofSalesInvErrors: Integer;
-        NoofSalesInv: Integer;
-        PostingDateReq: Date;
+        OldSeminarNo: Code[20];
         docDateReq: Date;
+        PostingDateReq: Date;
         Window: Dialog;
+        NextLineNo: Integer;
+        NoofSalesInv: Integer;
+        NoofSalesInvErrors: Integer;
         Text000: Label 'Please enter the posting date.';
         Text001: Label 'Please enter the document date.';
         Text002: Label 'Creating Seminar Invoices...\\';
@@ -179,52 +173,46 @@ report 50100 "Create Seminar Invoices"
         Text005: Label 'The number of invoice(s) created is %1.';
         Text006: Label 'not all the invoices were posted. A total of %1 invoices were not posted.';
         Text007: Label 'There is nothing to invoice.';
-        Seminar: Record "CSD Seminar";
-        OldSeminarNo: Code[20];
 
     local procedure FinalizeSalesInvoiceHeader();
     begin
-        with SalesHeader do begin
-            if CalcInvoiceDiscount then
-                SalesCalcDiscount.Run(SalesLine);
-            Get("document Type", "No.");
-            Commit;
-            Clear(SalesCalcDiscount);
+        if CalcInvoiceDiscount then
+            SalesCalcDiscount.Run(SalesLine);
+        SalesHeader.Get(SalesHeader."Document Type", SalesHeader."No.");
+        Commit();
+        Clear(SalesCalcDiscount);
+        Clear(SalesPost);
+        NoofSalesInv := NoofSalesInv + 1;
+        if PostInvoices then begin
             Clear(SalesPost);
-            NoofSalesInv := NoofSalesInv + 1;
-            if PostInvoices then begin
-                Clear(SalesPost);
-                if not SalesPost.Run(SalesHeader) then
-                    NoofSalesInvErrors := NoofSalesInvErrors + 1;
-            end;
+            if not SalesPost.Run(SalesHeader) then
+                NoofSalesInvErrors := NoofSalesInvErrors + 1;
         end;
     end;
 
     local procedure InsertSalesInvoiceHeader();
     begin
-        with SalesHeader do begin
-            Init;
-            "document Type" := "document Type"::Invoice;
-            "No." := '';
-            Insert(true);
-            Validate("Sell-to Customer No.", "Seminar Ledger Entry"."Bill-to Customer No.");
-            if "Bill-to Customer No." <> "Sell-to Customer No." then
-                Validate("Bill-to Customer No.", "Seminar Ledger Entry"."Bill-to Customer No.");
-            Validate("Posting Date", PostingDateReq);
-            Validate("document Date", docDateReq);
-            Validate("Currency Code", '');
-            Modify;
-            Commit;
+        SalesHeader.Init();
+        SalesHeader."Document Type" := SalesHeader."Document Type"::Invoice;
+        SalesHeader."No." := '';
+        SalesHeader.Insert(true);
+        SalesHeader.Validate("Sell-to Customer No.", "Seminar Ledger Entry"."Bill-to Customer No.");
+        if SalesHeader."Bill-to Customer No." <> SalesHeader."Sell-to Customer No." then
+            SalesHeader.Validate("Bill-to Customer No.", "Seminar Ledger Entry"."Bill-to Customer No.");
+        SalesHeader.Validate("Posting Date", PostingDateReq);
+        SalesHeader.Validate("Document Date", docDateReq);
+        SalesHeader.Validate("Currency Code", '');
+        SalesHeader.Modify();
+        Commit();
 
-            NextLineNo := 10000;
-            OldSeminarNo := '';
-        end;
+        NextLineNo := 10000;
+        OldSeminarNo := '';
     end;
 
     local procedure InsertSeminarHeaderLine()
     begin
         if "Seminar Ledger Entry"."Seminar No." <> OldSeminarNo then begin
-            SalesLine.init();
+            SalesLine.Init();
             SalesLine."Document No." := SalesHeader."No.";
             SalesLine."Document Type" := SalesHeader."Document Type";
             SalesLine."Line No." := NextLineNo;
@@ -239,4 +227,3 @@ report 50100 "Create Seminar Invoices"
         end;
     end;
 }
-

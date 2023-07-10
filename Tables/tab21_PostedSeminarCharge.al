@@ -21,7 +21,6 @@ table 50120 "CSD Posted Seminar Charge"
             Caption = 'Type';
             OptionCaption = 'Resource,G/L Account';
             OptionMembers = Resource,"G/L Account";
-
         }
         field(4; "No."; Code[20])
         {
@@ -38,22 +37,18 @@ table 50120 "CSD Posted Seminar Charge"
         {
             Caption = 'Quantity';
             DecimalPlaces = 0 : 5;
-
-
         }
         field(7; "Unit Price"; Decimal)
         {
-            Caption = 'Unit Price';
             AutoFormatType = 2;
+            Caption = 'Unit Price';
             MinValue = 0;
-
         }
         field(8; "Total Price"; Decimal)
         {
-            Caption = 'Total Price';
             AutoFormatType = 1;
+            Caption = 'Total Price';
             Editable = false;
-
         }
         field(9; "To Invoice"; Boolean)
         {
@@ -68,10 +63,9 @@ table 50120 "CSD Posted Seminar Charge"
         field(11; "Unit of Measure Code"; Code[10])
         {
             Caption = 'Unit of Measure Code';
-            TableRelation = if (Type = const(Resource)) "Resource Unit of Measure".Code where("Resource No." = Field("No."))
+            TableRelation = if (Type = const(Resource)) "Resource Unit of Measure".Code where("Resource No." = field("No."))
             else
             "Unit of Measure".Code;
-
         }
         field(12; "Gen. Prod. Posting Group"; Code[10])
         {
@@ -100,6 +94,4 @@ table 50120 "CSD Posted Seminar Charge"
         {
         }
     }
-
 }
-

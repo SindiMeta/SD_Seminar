@@ -10,32 +10,24 @@ table 50140 "CSD Seminar Cue"
         {
             Caption = 'Primary Key';
             DataClassification = ToBeClassified;
-
-
         }
-        field(20; "Planned"; Integer)
+        field(20; Planned; Integer)
         {
+            CalcFormula = count("CSD Seminar Reg. Header" where(Status = const(Planning)));
             Caption = 'Planned';
             FieldClass = FlowField;
-            CalcFormula = count("CSD Seminar Reg. Header" where(Status = const(Planning)));
-
-
-
         }
-        field(30; "Registered"; Integer)
+        field(30; Registered; Integer)
         {
+            CalcFormula = count("CSD Seminar Reg. Header" where(Status = const(Registration)));
             Caption = 'Registered';
             FieldClass = FlowField;
-            CalcFormula = Count("CSD Seminar Reg. Header" where(Status = const(Registration)));
-
-
         }
-        field(40; "Closed"; Integer)
+        field(40; Closed; Integer)
         {
+            CalcFormula = count("CSD Seminar Reg. Header" where(Status = const(Closed)));
             Caption = 'Closed';
             FieldClass = FlowField;
-            CalcFormula = Count("CSD Seminar Reg. Header" where(Status = const(Closed)));
-
         }
     }
 
@@ -47,27 +39,19 @@ table 50140 "CSD Seminar Cue"
         }
     }
 
-    var
-        myInt: Integer;
-
     trigger OnInsert()
     begin
-
     end;
 
     trigger OnModify()
     begin
-
     end;
 
     trigger OnDelete()
     begin
-
     end;
 
     trigger OnRename()
     begin
-
     end;
-
 }

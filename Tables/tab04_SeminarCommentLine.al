@@ -6,24 +6,21 @@ table 50104 "CSD Seminar Comment Line"
 {
     Caption = 'Seminar Comment Line';
     DataClassification = ToBeClassified;
-    LookupPageId = "CSD Seminar Comment List";
     DrillDownPageId = "CSD Seminar Comment List";
-
+    LookupPageId = "CSD Seminar Comment List";
 
     fields
     {
         field(10; "Table Name"; Option)
         {
             Caption = 'Table Name';
-            OptionMembers = "Seminar","Seminar Registration","Posted Seminar Registration";
-            OptionCaption = 'Seminar, Seminar Registration, Posted Seminar Registration';
             DataClassification = AccountData;
-
+            OptionCaption = 'Seminar, Seminar Registration, Posted Seminar Registration';
+            OptionMembers = Seminar,"Seminar Registration","Posted Seminar Registration";
         }
         field(20; "Document Line No."; Integer)
         {
             Caption = 'Document Line No.';
-
         }
         field(30; "No."; Code[20])
         {
@@ -33,7 +30,6 @@ table 50104 "CSD Seminar Comment Line"
             if ("Table Name" = const("Seminar Registration")) "CSD Seminar Reg. Header"
             else
             if ("Table Name" = const("Posted Seminar Registration")) "CSD Posted Seminar Reg. Header";
-
         }
         field(40; "Line No."; Integer)
         {
@@ -42,19 +38,15 @@ table 50104 "CSD Seminar Comment Line"
         field(50; "Date"; Date)
         {
             Caption = 'Date';
-
         }
         field(60; "Code"; Code[10])
         {
             Caption = 'Code';
-
         }
-        field(70; "Comment"; Text[80])
+        field(70; Comment; Text[80])
         {
             Caption = 'Comment';
-
         }
-
     }
 
     keys
@@ -63,7 +55,6 @@ table 50104 "CSD Seminar Comment Line"
         {
             Clustered = true;
         }
-
     }
     procedure SetupNewLine()
     var
@@ -73,9 +64,8 @@ table 50104 "CSD Seminar Comment Line"
         SeminarCommentLine.SetRange("No.", "No.");
         SeminarCommentLine.SetRange("Document Line No.",
         "Document Line No.");
-        SeminarCommentLine.SetRange("Date", WorkDate);
+        SeminarCommentLine.SetRange("Date", WorkDate());
         if SeminarCommentLine.IsEmpty then
-            Date := WorkDate;
+            Date := WorkDate();
     end;
-
 }

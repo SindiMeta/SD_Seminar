@@ -6,8 +6,8 @@ page 50122 "CSD Seminar Registers"
     Caption = 'Seminar Registers';
     Editable = false;
     PageType = List;
-    UsageCategory = Lists;
     SourceTable = "CSD Seminar Register";
+    UsageCategory = Lists;
 
     layout
     {
@@ -18,27 +18,22 @@ page 50122 "CSD Seminar Registers"
                 field("No."; Rec."No.")
                 {
                     ApplicationArea = All;
-
                 }
                 field("Creation Date"; Rec."Creation Date")
                 {
                     ApplicationArea = All;
-
                 }
                 field("User ID"; Rec."User ID")
                 {
                     ApplicationArea = All;
-
                 }
                 field("Source Code"; Rec."Source Code")
                 {
                     ApplicationArea = All;
-
                 }
                 field("Journal Batch Name"; Rec."Journal Batch Name")
                 {
                     ApplicationArea = All;
-
                 }
                 field("From Entry No."; Rec."From Entry No.")
                 {
@@ -48,7 +43,6 @@ page 50122 "CSD Seminar Registers"
                 {
                     ApplicationArea = All;
                 }
-
             }
         }
     }
@@ -59,7 +53,7 @@ page 50122 "CSD Seminar Registers"
         {
             action("Seminar Ledgers")
             {
-                ApplicationArea = all;
+                ApplicationArea = All;
                 Caption = 'Seminar Ledgers';
                 Image = WarrantyLedger;
                 RunObject = codeunit "CSD Seminar Reg.-Show Ledger";

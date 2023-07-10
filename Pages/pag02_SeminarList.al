@@ -2,15 +2,13 @@ page 50102 "CSD Seminar List"
 // CSD1.00 - 2018-01-01 - D. E. Veloper
 // Chapter 5 - Lab 2-6
 {
-    PageType = List;
     ApplicationArea = All;
-    UsageCategory = Lists;
-    SourceTable = "CSD Seminar";
     Caption = 'Seminar List';
+    CardPageId = "CSD Seminar Card";
     Editable = false;
-    CardPageId = 50101;
-
-
+    PageType = List;
+    SourceTable = "CSD Seminar";
+    UsageCategory = Lists;
 
     layout
     {
@@ -21,33 +19,26 @@ page 50102 "CSD Seminar List"
                 field("No."; Rec."No.")
                 {
                     ApplicationArea = All;
-
                 }
                 field(Name; Rec.Name)
                 {
                     ApplicationArea = All;
-
                 }
                 field("Seminar Duration"; Rec."Seminar Duration")
                 {
                     ApplicationArea = All;
-
                 }
                 field("Seminar Price"; Rec."Seminar Price")
                 {
                     ApplicationArea = All;
-
                 }
                 field("Minimum Participants"; Rec."Minimum Participants")
                 {
-
                     ApplicationArea = All;
-
                 }
                 field("Maximum Participants"; Rec."Maximum Participants")
                 {
                     ApplicationArea = All;
-
                 }
             }
         }
@@ -55,13 +46,11 @@ page 50102 "CSD Seminar List"
         {
             systempart("Links"; Links)
             {
-                ApplicationArea = all;
-
+                ApplicationArea = All;
             }
             systempart("Notes"; Notes)
             {
-                ApplicationArea = all;
-
+                ApplicationArea = All;
             }
         }
     }
@@ -74,41 +63,38 @@ page 50102 "CSD Seminar List"
             {
                 action("&Comments")
                 {
-                    Caption = '&Comments';
                     ApplicationArea = All;
-                    RunObject = page "CSD Seminar Comment Sheet";
-
-                    RunPageLink = "Table Name" = const(Seminar), "No." = field("No.");
+                    Caption = '&Comments';
                     Image = Comment;
                     Promoted = true;
                     PromotedIsBig = true;
                     PromotedOnly = true;
+                    RunObject = page "CSD Seminar Comment Sheet";
+                    RunPageLink = "Table Name" = const(Seminar), "No." = field("No.");
                 }
                 // >> Lab 8-2
                 action("Ledger Entries")
                 {
-                    Caption = 'Ledger Entries';
                     ApplicationArea = All;
-                    RunObject = page "CSD Seminar Ledger Entries";
-                    RunPageLink = "Seminar No." = field("No.");
+                    Caption = 'Ledger Entries';
+                    Image = WarrantyLedger;
                     Promoted = true;
                     PromotedCategory = Process;
+                    RunObject = page "CSD Seminar Ledger Entries";
+                    RunPageLink = "Seminar No." = field("No.");
                     ShortcutKey = "Ctrl+F7";
-                    Image = WarrantyLedger;
                 }
                 action("&Registrations")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                     Caption = '&Registrations';
-                    RunObject = page "CSD Seminar Registration List";
-                    RunPageLink = "Seminar No." = field("No.");
                     Image = Timesheet;
                     Promoted = true;
                     PromotedCategory = Process;
+                    RunObject = page "CSD Seminar Registration List";
+                    RunPageLink = "Seminar No." = field("No.");
                 }
                 // << Lab 8-2
-
-
             }
         }
         // >> Lab 8-2
@@ -116,14 +102,14 @@ page 50102 "CSD Seminar List"
         {
             action("Seminar Registration")
             {
+                ApplicationArea = All;
                 Caption = 'Seminar Registration';
-                ApplicationArea = all;
-                RunObject = page "CSD Seminar Registration";
-                RunPageLink = "Seminar No." = field("No.");
-                RunPageMode = Create;
                 Image = NewTimesheet;
                 Promoted = true;
                 PromotedCategory = New;
+                RunObject = page "CSD Seminar Registration";
+                RunPageLink = "Seminar No." = field("No.");
+                RunPageMode = Create;
             }
         }
         // << Lab 8-2

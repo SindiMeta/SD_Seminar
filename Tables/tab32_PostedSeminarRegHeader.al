@@ -3,13 +3,12 @@ table 50118 "CSD Posted Seminar Reg. Header"
 // Chapter 7 - Lab 3-1
 // Chapter 8 - Lab 2 - 3
 // Added LookupPageId & DrilldownPageId properties
-//Holds the information for the completed (posted) seminar. Takes the data from the Seminar Registration Header 
+//Holds the information for the completed (posted) seminar. Takes the data from the Seminar Registration Header
 //table during posting.
 {
-
     Caption = 'Posted Seminar Registration Header';
-    LookupPageId = "CSD Posted Seminar Reg. List";
     DrillDownPageId = "CSD Posted Seminar Reg. List";
+    LookupPageId = "CSD Posted Seminar Reg. List";
 
     fields
     {
@@ -17,13 +16,10 @@ table 50118 "CSD Posted Seminar Reg. Header"
 
         {
             Caption = 'No';
-
         }
         field(2; "Starting Date"; Date)
         {
-
             Caption = 'Starting Date';
-
         }
         field(3; "Seminar No."; Code[20])
         {
@@ -46,8 +42,8 @@ table 50118 "CSD Posted Seminar Reg. Header"
         }
         field(6; "Instructor Name"; Text[100])
         {
-            Caption = 'Instructor Name';
             CalcFormula = lookup(Resource.Name where("No." = field("Instructor Resource No."), Type = const(Person)));
+            Caption = 'Instructor Name';
             Editable = false;
             FieldClass = FlowField;
         }
@@ -92,12 +88,10 @@ table 50118 "CSD Posted Seminar Reg. Header"
             Caption = 'Room Post Code';
             TableRelation = "Post Code".Code;
             ValidateTableRelation = false;
-
         }
         field(16; "Room City"; Text[30])
         {
             Caption = 'Room City';
-
         }
         field(17; "Room Country/Reg. Code"; Code[10])
         {
@@ -110,8 +104,8 @@ table 50118 "CSD Posted Seminar Reg. Header"
         }
         field(19; "Seminar Price"; Decimal)
         {
-            Caption = 'Seminar Price';
             AutoFormatType = 1;
+            Caption = 'Seminar Price';
         }
         field(20; "Gen. Prod. Posting Group"; Code[10])
         {
@@ -125,9 +119,9 @@ table 50118 "CSD Posted Seminar Reg. Header"
         }
         field(22; Comment; Boolean)
         {
-            Caption = 'Comment';
             CalcFormula = exist("CSD Seminar Comment Line" where("Table Name" = const("Posted Seminar Registration"),
             "No." = field("No.")));
+            Caption = 'Comment';
             Editable = false;
             FieldClass = FlowField;
         }
@@ -161,7 +155,6 @@ table 50118 "CSD Posted Seminar Reg. Header"
         {
             Caption = 'Posting No. Series';
             TableRelation = "No. Series".Code;
-
         }
         field(28; "Posting No."; Code[20])
         {
@@ -180,7 +173,6 @@ table 50118 "CSD Posted Seminar Reg. Header"
             DataClassification = ToBeClassified;
             TableRelation = "Source Code";
         }
-
     }
 
     keys
@@ -193,5 +185,4 @@ table 50118 "CSD Posted Seminar Reg. Header"
             SumIndexFields = Duration;
         }
     }
-
 }

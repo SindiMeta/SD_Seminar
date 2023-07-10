@@ -9,18 +9,17 @@ table 50119 "CSD Posted Seminar Reg. Line"
     {
         field(1; "Document No."; Code[20])
         {
-            caption = 'Document No.';
+            Caption = 'Document No.';
             TableRelation = "CSD Seminar Reg. Header";
         }
         field(2; "Line No."; Integer)
         {
-            caption = 'Line No.';
+            Caption = 'Line No.';
         }
         field(3; "Bill-to Customer No."; Code[20])
         {
             Caption = 'Bill-to Customer No.';
             TableRelation = Customer;
-
         }
         field(4; "Participant Contact No."; Code[20])
         {
@@ -29,8 +28,8 @@ table 50119 "CSD Posted Seminar Reg. Line"
         }
         field(5; "Participant Name"; Text[100])
         {
+            CalcFormula = lookup(Contact.Name where("No." = field("Participant Contact No.")));
             Caption = 'Participant Name';
-            CalcFormula = Lookup(Contact.Name where("No." = Field("Participant Contact No.")));
             Editable = false;
             FieldClass = FlowField;
         }
@@ -55,12 +54,12 @@ table 50119 "CSD Posted Seminar Reg. Line"
         }
         field(10; "Seminar Price"; Decimal)
         {
-            Caption = 'Seminar Price';
             AutoFormatType = 2;
+            Caption = 'Seminar Price';
 
             trigger OnValidate();
             begin
-                VALIDATE("Line Discount %");
+                Validate("Line Discount %");
             end;
         }
         field(11; "Line Discount %"; Decimal)
@@ -69,19 +68,16 @@ table 50119 "CSD Posted Seminar Reg. Line"
             DecimalPlaces = 0 : 5;
             MaxValue = 100;
             MinValue = 0;
-
         }
         field(12; "Line Discount Amount"; Decimal)
         {
-            Caption = 'Line Discount Amount';
             AutoFormatType = 1;
-
+            Caption = 'Line Discount Amount';
         }
         field(13; Amount; Decimal)
         {
-            Caption = 'Amount';
             AutoFormatType = 1;
-
+            Caption = 'Amount';
         }
         field(14; Registered; Boolean)
         {
@@ -97,4 +93,3 @@ table 50119 "CSD Posted Seminar Reg. Line"
         }
     }
 }
-

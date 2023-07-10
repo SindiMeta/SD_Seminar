@@ -161,8 +161,6 @@ table 50131 "CSD Seminar Journal Line"
     procedure EmptyLine(): Boolean;
 
     begin
-        exit(("Seminar No." = '') AND (Quantity = 0));
-
+        exit(("Seminar No." = '') and (Quantity = 0));
     end;
 }
-

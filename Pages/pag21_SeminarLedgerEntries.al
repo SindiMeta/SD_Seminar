@@ -5,8 +5,8 @@ page 50121 "CSD Seminar Ledger Entries"
     Caption = 'Seminar Ledger Entries';
     Editable = false;
     PageType = List;
-    UsageCategory = Lists;
     SourceTable = "CSD Seminar Ledger Entry";
+    UsageCategory = Lists;
 
     layout
     {
@@ -16,98 +16,96 @@ page 50121 "CSD Seminar Ledger Entries"
             {
                 field("Posting Date"; Rec."Posting Date")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Document No."; Rec."Document No.")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Document Date"; Rec."Document Date")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                     Visible = false;
                 }
                 field("Entry Type"; Rec."Entry Type")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Seminar No."; Rec."Seminar No.")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field(Description; Rec.Description)
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Bill-to Customer No."; Rec."Bill-to Customer No.")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Charge Type"; Rec."Charge Type")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field(Type; Rec.Type)
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field(Quantity; Rec.Quantity)
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Unit Price"; Rec."Unit Price")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Total Price"; Rec."Total Price")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field(Chargeable; Rec.Chargeable)
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Participant Contact No."; Rec."Participant Contact No.")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Participant Name"; Rec."Participant Name")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Instructor Resource No."; Rec."Instructor Resource No.")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Room Resource No."; Rec."Room Resource No.")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Starting Date"; Rec."Starting Date")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Seminar Registration No."; Rec."Seminar Registration No.")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Entry No."; Rec."Entry No.")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
             }
         }
-        area(factboxes)
+        area(FactBoxes)
         {
             systempart("Record Links"; Links)
             {
-                ApplicationArea = all;
-
+                ApplicationArea = All;
             }
             systempart("Notes"; Notes)
             {
-                ApplicationArea = all;
-
+                ApplicationArea = All;
             }
         }
     }
@@ -117,15 +115,15 @@ page 50121 "CSD Seminar Ledger Entries"
         {
             action("&Navigate")
             {
+                ApplicationArea = All;
                 Caption = '&Navigate';
                 Image = Navigate;
                 Promoted = true;
                 PromotedCategory = Process;
-                ApplicationArea = All;
 
                 trigger OnAction();
                 var
-                    Navigate: page Navigate;
+                    Navigate: Page Navigate;
                 begin
                     Navigate.SetDoc(Rec."Posting Date", Rec."Document No.");
                     Navigate.Run();

@@ -4,7 +4,6 @@ tableextension 50103 "CSD ResourceLedgerEntryExt" extends "Res. Ledger Entry"
 
 //Add fields to link the resource ledger entries to the seminars and to the posted seminar registration documents.
 {
-
     fields
     {
         //Lets you keep track of which instructor or room is connected with a seminar.
@@ -21,7 +20,4 @@ tableextension 50103 "CSD ResourceLedgerEntryExt" extends "Res. Ledger Entry"
             TableRelation = "CSD Seminar Reg. Header";
         }
     }
-
-    var
-        myInt: Integer;
 }

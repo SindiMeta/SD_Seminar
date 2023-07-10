@@ -4,9 +4,9 @@ page 50140 "CSD Seminar Manager Activities"
 // - Created new page
 {
     Caption = 'Seminar Manager Activities';
+    Editable = false;
     PageType = CardPart;
     SourceTable = "CSD Seminar Cue";
-    Editable = false;
 
     layout
     {
@@ -18,12 +18,10 @@ page 50140 "CSD Seminar Manager Activities"
                 field(Planned; Rec.Planned)
                 {
                     ApplicationArea = All;
-
                 }
                 field(Registered; Rec.Registered)
                 {
                     ApplicationArea = All;
-
                 }
                 actions
                 {
@@ -34,26 +32,23 @@ page 50140 "CSD Seminar Manager Activities"
                         RunPageMode = Create;
                     }
                 }
-
             }
             cuegroup("For Posting")
             {
                 Caption = 'For Posting';
                 field(Closed; Rec.Closed)
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
-
             }
         }
     }
     trigger OnOpenPage();
 
     begin
-        if not Rec.get then begin
-            Rec.init;
-            Rec.insert;
+        if not Rec.Get() then begin
+            Rec.Init();
+            Rec.Insert();
         end;
-
     end;
 }

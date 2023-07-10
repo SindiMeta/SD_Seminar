@@ -1,5 +1,6 @@
 page 50123 "CSD Seminar Report Selection"
 {
+    ApplicationArea = All;
     // CSD1.00 - 2018-01-01 - D. E. Veloper
     //   Chapter 9 - Lab 1
     //     - Created new page
@@ -9,54 +10,53 @@ page 50123 "CSD Seminar Report Selection"
     SaveValues = true;
     SourceTable = "CSD Seminar Report Selections";
     UsageCategory = Administration;
-    ApplicationArea = all;
 
     layout
     {
-        area(content)
+        area(Content)
         {
             field(ReportUsage2; ReportUsage2)
             {
-                ApplicationArea = all;
+                ApplicationArea = All;
                 Caption = 'Usage';
                 OptionCaption = 'Registration';
 
                 trigger OnValidate();
                 begin
-                    SetUsageFilter;
-                    ReportUsage2OnAfterValidate;
+                    SetUsageFilter();
+                    ReportUsage2OnAfterValidate();
                 end;
             }
             repeater(General)
             {
                 field(Sequence; Rec.Sequence)
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                 }
                 field("Report ID"; Rec."Report ID")
                 {
-                    ApplicationArea = all;
-                    LookupPageID = Objects;
+                    ApplicationArea = All;
+                    LookupPageId = Objects;
                 }
                 field("Report Name"; Rec."Report Name")
                 {
-                    ApplicationArea = all;
+                    ApplicationArea = All;
                     DrillDown = false;
-                    LookupPageID = Objects;
+                    LookupPageId = Objects;
                 }
             }
         }
-        area(factboxes)
+        area(FactBoxes)
         {
             systempart("Links"; Links)
             {
-                ApplicationArea = all;
+                ApplicationArea = All;
                 Caption = 'Links';
                 Visible = false;
             }
             systempart("Notes"; Notes)
             {
-                ApplicationArea = all;
+                ApplicationArea = All;
                 Caption = 'Notes';
                 Visible = false;
             }
@@ -65,12 +65,12 @@ page 50123 "CSD Seminar Report Selection"
 
     trigger OnNewRecord(BelowxRec: Boolean);
     begin
-        Rec.NewRecord;
+        Rec.NewRecord();
     end;
 
     trigger OnOpenPage();
     begin
-        SetUsageFilter;
+        SetUsageFilter();
     end;
 
     var
@@ -78,17 +78,16 @@ page 50123 "CSD Seminar Report Selection"
 
     local procedure SetUsageFilter();
     begin
-        Rec.FILTERGROUP(2);
-        CASE ReportUsage2 OF
+        Rec.FilterGroup(2);
+        case ReportUsage2 of
             ReportUsage2::Registration:
-                Rec.SETRANGE(Usage, Rec.Usage::Registration);
+                Rec.SetRange(Usage, Rec.Usage::Registration);
         end;
-        Rec.FILTERGROUP(0);
+        Rec.FilterGroup(0);
     end;
 
     local procedure ReportUsage2OnAfterValidate();
     begin
-        CurrPage.UPDATE;
+        CurrPage.Update();
     end;
 }
-
