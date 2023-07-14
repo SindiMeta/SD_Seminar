@@ -36,9 +36,9 @@ page 50100 "CSD Seminar Setup"
     begin
         //Merr një rekord bazuar në vlerat e ruajtura ne primary key
         if not Rec.Get() then begin
-            //Inicializon një rekord në një tabelë.
+            //nese nuk gjen Inicializon një rekord te ri në tabelë.
             Rec.Init();
-            //Fut një rekord në një tabelë pa ekzekutuar kodin në trigger OnInsert.
+            //dhe i fut ne tabele
             Rec.Insert();
         end;
     end;

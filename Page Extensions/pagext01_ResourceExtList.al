@@ -6,41 +6,37 @@ pageextension 50110 "CSD ResourceListExt" extends "Resource List"
 {
     layout
     {
-        // modify(Type)
-        // {
-        //     //  Visible = ShowType;
-        // }
+        modify(Type)
+        {
+            Visible = ShowType;
+        }
         addafter(Type)
         {
             field("CSD Resource Type"; Rec."CSD Resource Type")
             {
-                ApplicationArea = All;
+                ApplicationArea = all;
             }
             field("CSD Maximum Participants"; Rec."CSD Maximum Participants")
             {
-                //  Visible = ShowMaxField;
-                ApplicationArea = All;
+                ApplicationArea = all;
+                Visible = ShowMaxField;
+
             }
         }
     }
 
-    //  trigger OnOpenPage();
-    // begin
+    trigger OnOpenPage();
+    begin
 
-    //     ShowType := (Rec.GetFilter(Type) = '');
-    //     ShowMaxField := (Rec.GetFilter(Type) = format(Rec.Type::Machine));
 
-    // end;
+        ShowType := (Rec.GetFilter(Type) = '');
+        ShowMaxField := (Rec.GetFilter(Type) = format(Rec.Type::Machine));
 
-    // trigger OnAfterGetCurrRecord()
-    // begin
-    //     ShowType := (Rec.GetFilter(Type) = '');
-    //     ShowMaxField := (Rec.GetFilter(Type) = format(Rec.Type::Machine));
-    // end;
+    end;
 
-    // var
-    //     [InDataSet]
-    //     ShowMaxField: Boolean;
-    //     [InDataSet]
-    //     ShowType: Boolean;
+    var
+        [InDataSet]
+        ShowMaxField: Boolean;
+        [InDataSet]
+        ShowType: Boolean;
 }

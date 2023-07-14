@@ -1,3 +1,4 @@
+//mban tarifa qe lidhen me regjistrimin e seminarit, jane vec nga tarifat individuale ne SemRegLine table
 page 50124 "CSD Seminar Charges"
 {
     // CSD1.00 - 2018-01-01 - D. E. Veloper

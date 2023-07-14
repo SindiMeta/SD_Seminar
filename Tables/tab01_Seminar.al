@@ -3,6 +3,7 @@ table 50101 "CSD Seminar"
 //Lab 5.2: Task 2
 {
     Caption = 'Seminar';
+    //se cila faqe ofron sjelljen standarte te kerkimit kur kerkohet info per nje tabele tjeter
     DrillDownPageId = "CSD Seminar List";
     LookupPageId = "CSD Seminar List";
 
@@ -12,8 +13,8 @@ table 50101 "CSD Seminar"
         {
             Caption = 'No';
 
-            //kur përdoruesi ndryshon vlerën No., validoni që seria e numrave që përdoret për caktimin e numrit lejon numra manualë.
-            //Pastaj vendoseni fushën Nr. Series bosh.
+            //kur përdoruesi ndryshon vlerën No., validoni që seria e numrave që përdoret për caktimin e numrit lejon 
+            //numra manualë, Pastaj vendoseni fushën Nr. Series bosh.
             trigger OnValidate();
             begin
                 if "No." <> xRec."No." then begin
@@ -26,7 +27,8 @@ table 50101 "CSD Seminar"
         field(20; Name; Text[50])
         {
             Caption = 'Name';
-            //vendosni kodin që përcakton Search Name field nëse ishte e barabartë me shkronjat e mëdha të vlerës së mëparshme të Name fiel.
+            //vendosni kodin që përcakton Search Name field nëse ishte e barabartë me shkronjat e mëdha të vlerës 
+            //së mëparshme të Name field.
             trigger OnValidate();
             begin
                 if ("Search Name" = UpperCase(xRec.Name)) or
@@ -51,6 +53,7 @@ table 50101 "CSD Seminar"
         {
             Caption = 'Search Name';
         }
+        //blocked per te dhenat te vjetra qe nuk duhen fshire po ruhen per qellime analize apo statistike
         field(70; Blocked; Boolean)
         {
             Caption = 'Blocked';
@@ -62,11 +65,12 @@ table 50101 "CSD Seminar"
         }
         field(90; Comment; Boolean)
         {
+            //kontrollon nese te dhenat egzistojne 
             CalcFormula = exist("CSD Seminar Comment Line"
-            where("Table Name" = const(Seminar),
-            "No." = field("No.")));
+            where("Table Name" = const(Seminar), "No." = field("No.")));
             Caption = 'Comment';
             Editable = false;
+            //përfaqëson një fushë të llogaritur që shfaq një vlerë të bazuar në llogaritjen e fushave të tjera në të njëjtën tabelë
             FieldClass = FlowField;
         }
         field(100; "Seminar Price"; Decimal)
@@ -109,6 +113,7 @@ table 50101 "CSD Seminar"
     {
         key(PK; "No.")
         {
+            //permireson kohen qe duhet per te marre te dhenat
             Clustered = true;
         }
         key(key1; "Search Name")
@@ -119,7 +124,8 @@ table 50101 "CSD Seminar"
     trigger OnInsert()
 
     begin
-        //nese nuk ka nje vlere ne No. caktoni vleren tjeter nga seria e numrave e specifikuar ne Seminar Nos. ne Seminar Table
+        //nese nuk ka nje vlere ne No. caktoni vleren tjeter nga seria e numrave e specifikuar ne Seminar Nos. 
+        //ne Seminar Setup Table
         if "No." = '' then begin
             SeminarSetup.Get();
             SeminarSetup.TestField("Seminar Nos.");
@@ -163,19 +169,15 @@ table 50101 "CSD Seminar"
         //and then calls the SelectSeries function in the NoSeriesManagement codeunit to check the series number.
         //If this function returns True, call the SetSeries function in the NoSeriesManagement codeunit to set the No. field,
         //and then return True.
-
-        Seminars.Reset();
-        if Seminars.FindFirst() then begin
-            //with Seminars do begin
-            Seminars := Rec;
-            SeminarSetup.Get();
-            SeminarSetup.TestField("Seminar Nos.");
-            if NoSeriesMgt.SelectSeries(SeminarSetup."Seminar Nos."
-            , xRec."No. Series", Seminars."No. Series") then begin
-                NoSeriesMgt.SetSeries(Seminars."No.");
-                Rec := Seminars;
-                exit(true);
-            end;
+        Seminars := Rec;
+        SeminarSetup.Get();
+        SeminarSetup.TestField("Seminar Nos.");
+        if NoSeriesMgt.SelectSeries(SeminarSetup."Seminar Nos."
+        , xRec."No. Series", Seminars."No. Series") then begin
+            NoSeriesMgt.SetSeries(Seminars."No.");
+            Rec := Seminars;
+            exit(true);
         end;
+
     end;
 }

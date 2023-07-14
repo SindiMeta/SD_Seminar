@@ -18,6 +18,7 @@ page 50101 "CSD Seminar Card"
                     AssistEdit = true;
 
                     //per te mbesht funks e serise se numrave
+                    //to update the page if the function returns True
                     trigger OnAssistEdit()
                     begin
                         if Rec.AssistEdit() then
@@ -69,6 +70,8 @@ page 50101 "CSD Seminar Card"
                 }
             }
         }
+
+        //te gjitha card and list pages duhet te kene links & notes factboxes qe shfaqin te dhenat e aplikacionit
         area(FactBoxes)
         {
             systempart("Links"; Links)

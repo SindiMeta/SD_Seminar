@@ -11,21 +11,19 @@ table 50111 "CSD Seminar Registration Line"
         field(1; "Document No."; Code[20])
         {
             Caption = 'Document No.';
-            DataClassification = AccountData;
             TableRelation = "CSD Seminar Reg. Header";
         }
         field(2; "Line No."; Integer)
         {
             Caption = 'Line No.';
-            DataClassification = AccountData;
+
         }
         field(3; "Bill-to Customer No."; Code[20])
         {
             Caption = 'Bill-to Customer No.';
-            DataClassification = AccountData;
             TableRelation = Customer;
 
-            //makes sure that youcannot change the customer for the registered line.
+            //makes sure that you cannot change the customer for the registered line.
             trigger OnValidate();
             begin
                 if "Bill-to Customer No." <> xRec."Bill-to Customer No." then
@@ -39,9 +37,14 @@ table 50111 "CSD Seminar Registration Line"
         field(4; "Participant Contact No."; Code[20])
         {
             Caption = 'Participant Contact No.';
-            DataClassification = AccountData;
             TableRelation = Contact;
-
+            // The OnValidate trigger in the Participant Contact No. field makes sure that the contact selected by the user is related 
+            // to the customer that is specified in the Bill-to Customer No. field. It filters the information in the 
+            // Contact Business Relation table to determine whether the contact that the user has specified is related to 
+            // the customer that is referenced in the Bill-to Customer No. field. If the contact is not related to the customer, 
+            // an error that describes the problem is thrown. The trigger also calls the CalcField function to retrieve the 
+            // Participant Name field from the Contact table. 
+            // The Participant Name field is a FlowField that uses the Lookup method to dynamically calculate the value of the field.
             trigger OnLookup();
             begin
                 ContactBusinessRelation.Reset();
@@ -87,31 +90,26 @@ table 50111 "CSD Seminar Registration Line"
         field(6; "Registration Date"; Date)
         {
             Caption = 'Registration Date';
-            DataClassification = AccountData;
             Editable = false;
         }
         field(7; "To Invoice"; Boolean)
         {
             Caption = 'To Invoice';
-            DataClassification = AccountData;
             InitValue = true;
         }
         field(8; Participated; Boolean)
         {
             Caption = 'Participated';
-            DataClassification = AccountData;
         }
         field(9; "Confirmation Date"; Date)
         {
             Caption = 'Confirmation Date';
-            DataClassification = AccountData;
             Editable = false;
         }
         field(10; "Seminar Price"; Decimal)
         {
             AutoFormatType = 2;
             Caption = 'Seminar Price';
-            DataClassification = AccountData;
 
             trigger OnValidate();
             begin
@@ -141,7 +139,6 @@ table 50111 "CSD Seminar Registration Line"
         {
             AutoFormatType = 1;
             Caption = 'Line Discount Amount';
-            DataClassification = AccountData;
 
             trigger OnValidate();
             begin
@@ -158,7 +155,6 @@ table 50111 "CSD Seminar Registration Line"
         {
             AutoFormatType = 1;
             Caption = 'Amount';
-            DataClassification = AccountData;
 
             trigger OnValidate();
             begin
@@ -176,8 +172,7 @@ table 50111 "CSD Seminar Registration Line"
         field(14; Registered; Boolean)
         {
             Caption = 'Registered';
-            DataClassification = AccountData;
-            Editable = false;
+            Editable = true;
         }
     }
 

@@ -4,6 +4,7 @@ page 50102 "CSD Seminar List"
 {
     ApplicationArea = All;
     Caption = 'Seminar List';
+    //which page show when double click lines or when users click new, edit, view, delete actions
     CardPageId = "CSD Seminar Card";
     Editable = false;
     PageType = List;

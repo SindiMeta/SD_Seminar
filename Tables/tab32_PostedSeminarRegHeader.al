@@ -125,13 +125,6 @@ table 50118 "CSD Posted Seminar Reg. Header"
             Editable = false;
             FieldClass = FlowField;
         }
-        // field(22;Comment;Boolean)
-        // {
-        //     CalcFormula = Exist("CSD Seminar Comment Line" where (Table Name=const(Seminar Registration Header),
-        //                                                       No.=Field(No.)));
-        //     Editable = false;
-        //     FieldClass = FlowField;
-        // }
         field(23; "Posting Date"; Date)
         {
             Caption = 'Posting Date';

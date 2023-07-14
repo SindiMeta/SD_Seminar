@@ -1,3 +1,5 @@
+//Holds charges that are related to the seminar registration. These are in addition to the individual participant charges
+//of the Seminar Registration Line table.
 table 50112 "CSD Seminar Charge"
 {
     // CSD1.00 - 2018-01-01 - D. E. Veloper
@@ -10,25 +12,24 @@ table 50112 "CSD Seminar Charge"
         field(1; "Document No."; Code[20])
         {
             Caption = 'Document No.';
-            DataClassification = AccountData;
             NotBlank = true;
             TableRelation = "CSD Seminar Reg. Header";
         }
         field(2; "Line No."; Integer)
         {
             Caption = 'Line No.';
-            DataClassification = AccountData;
+
         }
         field(3; Type; Option)
         {
             Caption = 'Type';
-            DataClassification = AccountData;
             OptionCaption = 'Resource,G/L Account';
             OptionMembers = Resource,"G/L Account";
             //Ai ruan vlerën aktuale të fushës "Type" në një variabël të quajtur "OldType".
             //Ai thërret procedurën "Init" për të inicializuar fushat e regjistrimit në vlerat e tyre të paracaktuara.
             //Ai cakton vlerën e ruajtur të "OldType" përsëri në fushën "Type", duke rivendosur vlerën e saj origjinale.
-            //Qëllimi i këtij aktivizimi është të rivendosë fushat e regjistrimit në gjendjen e tyre fillestare nëse ndryshohet fusha "Type"
+            //Qëllimi i këtij aktivizimi është të rivendosë fushat e regjistrimit në gjendjen e tyre fillestare nëse
+            // ndryshohet fusha "Type"
             trigger OnValidate();
             var
                 OldType: Integer;
@@ -46,7 +47,7 @@ table 50112 "CSD Seminar Charge"
             TableRelation = if (Type = const(Resource)) Resource."No."
             else
             if (Type = const("G/L Account")) "G/L Account"."No.";
-            //Ky aktivizues është përgjegjës për plotësimin e fushave përkatëse bazuar në "Lloji" i zgjedhur në regjistrim, pavarësisht nëse është një burim ose një llogari G/L.
+            //Ky aktivizues është përgjegjës për plotësimin e fushave përkatëse bazuar në "" i zgjedhur në regjistrim, pavarësisht nëse është një burim ose një llogari G/L.
             //Kryen vërtetime dhe kopjon vlerat e fushës në përputhje me rrethanat për të siguruar konsistencën dhe saktësinë e të dhënave.
             trigger OnValidate();
             begin
@@ -77,7 +78,7 @@ table 50112 "CSD Seminar Charge"
         field(5; Description; Text[50])
         {
             Caption = 'Description';
-            DataClassification = AccountData;
+
         }
         //quantity, unit price dhe total price jane te nderlidhura
         //- Kur përdoruesi ndryshon ose sasinë ose çmimin për njësi, sistemi llogarit Çmimin Total.
@@ -85,7 +86,6 @@ table 50112 "CSD Seminar Charge"
         field(6; Quantity; Decimal)
         {
             Caption = 'Quantity';
-            DataClassification = AccountData;
             DecimalPlaces = 0 : 5;
 
             trigger OnValidate();
@@ -97,7 +97,6 @@ table 50112 "CSD Seminar Charge"
         {
             AutoFormatType = 2;
             Caption = 'Unit Price';
-            DataClassification = AccountData;
             MinValue = 0;
 
             trigger OnValidate();
@@ -109,7 +108,6 @@ table 50112 "CSD Seminar Charge"
         {
             AutoFormatType = 1;
             Caption = 'Total Price';
-            DataClassification = AccountData;
             Editable = false;
 
             trigger OnValidate();
@@ -123,19 +121,16 @@ table 50112 "CSD Seminar Charge"
         field(9; "To Invoice"; Boolean)
         {
             Caption = 'To Invoice';
-            DataClassification = AccountData;
             InitValue = true;
         }
         field(10; "Bill-to Customer No."; Code[20])
         {
             Caption = 'Bill-to Customer No.';
-            DataClassification = AccountData;
             TableRelation = Customer."No.";
         }
         field(11; "Unit of Measure Code"; Code[10])
         {
             Caption = 'Unit of Measure Code';
-            DataClassification = AccountData;
             TableRelation = if (Type = const(Resource)) "Resource Unit of Measure".Code where("Resource No." = field("No."))
             else
             "Unit of Measure".Code;

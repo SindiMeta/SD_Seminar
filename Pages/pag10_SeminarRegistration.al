@@ -10,6 +10,7 @@ page 50110 "CSD Seminar Registration"
     PageType = Document;
     SourceTable = "CSD Seminar Reg. Header";
 
+
     layout
     {
         area(Content)
@@ -39,9 +40,6 @@ page 50110 "CSD Seminar Registration"
                 {
                     ApplicationArea = All;
                 }
-                // field("Instructor Code";Rec."Instructor Code")
-                // {
-                // }
                 field("Instructor Resource No."; Rec."Instructor Resource No.")
                 {
                     ApplicationArea = All;
@@ -84,9 +82,7 @@ page 50110 "CSD Seminar Registration"
             }
             group("Seminar Room")
             {
-                //  field("Room Code";Rec."Room Code")
-                // {
-                // }
+
                 field("Room Resource No."; Rec."Room Resource No.")
                 {
                     ApplicationArea = All;
@@ -198,7 +194,6 @@ page 50110 "CSD Seminar Registration"
                 }
                 action("&Print")
                 {
-                    ApplicationArea = All;
                     Caption = '&Print';
                     Image = Print;
                     Promoted = true;

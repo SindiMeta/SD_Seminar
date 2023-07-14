@@ -35,6 +35,7 @@ table 50100 "CSD Seminar Setup"
     {
         key(PK; "Primary Key")
         {
+            //permireson kohen qe duhet per te marre te dhenat
             Clustered = true;
         }
     }

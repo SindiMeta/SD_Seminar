@@ -41,6 +41,7 @@ codeunit 50139 "CSD EventSubscriptions"
             DocumentEntry."Document Type" := DocumentEntry."Document Type"::" ";
             DocumentEntry."Table Name" := CopyStr(PostedSeminerRegHeader.TableCaption, 1, MaxStrLen(DocumentEntry."Table Name"));
             DocumentEntry."No. of Records" := DocNoOfRecords;
+            //e ranon kodin brenda me true
             DocumentEntry.Insert();
         end;
     end;

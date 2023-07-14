@@ -1,3 +1,4 @@
+//lejon users te fusin dhe ndryshojne te dhena ne Seminar Comment Line table
 page 50106 "CSD Seminar Comment Sheet"
 // CSD1.00 - 2018-01-01 - D. E. Veloper
 //Lab 5.3: Task 2

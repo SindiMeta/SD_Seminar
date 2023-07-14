@@ -1,6 +1,6 @@
 page 50123 "CSD Seminar Report Selection"
 {
-    ApplicationArea = All;
+
     // CSD1.00 - 2018-01-01 - D. E. Veloper
     //   Chapter 9 - Lab 1
     //     - Created new page
@@ -9,7 +9,7 @@ page 50123 "CSD Seminar Report Selection"
     PageType = Worksheet;
     SaveValues = true;
     SourceTable = "CSD Seminar Report Selections";
-    UsageCategory = Administration;
+
 
     layout
     {
@@ -50,14 +50,10 @@ page 50123 "CSD Seminar Report Selection"
         {
             systempart("Links"; Links)
             {
-                ApplicationArea = All;
-                Caption = 'Links';
                 Visible = false;
             }
             systempart("Notes"; Notes)
             {
-                ApplicationArea = All;
-                Caption = 'Notes';
                 Visible = false;
             }
         }

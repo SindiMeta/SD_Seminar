@@ -18,7 +18,6 @@ table 50110 "CSD Seminar Reg. Header"
 
         {
             Caption = 'No';
-            DataClassification = AccountData;
             //Ai kontrollon nëse seria e caktuar në fushë lejon hyrjen manuale dhe rivendos fushën "Nr. Seria" nëse lejohet futja manuale.
             trigger OnValidate()
             begin
@@ -35,7 +34,6 @@ table 50110 "CSD Seminar Reg. Header"
         field(2; "Starting Date"; Date)
         {
             Caption = 'Starting Date';
-            DataClassification = AccountData;
             //Nëse data e fillimit ndryshohet, ajo kontrollon dhe zbaton që statusi të jetë vendosur në "Planifikimi"
             trigger OnValidate();
             begin
@@ -46,12 +44,9 @@ table 50110 "CSD Seminar Reg. Header"
         field(3; "Seminar No."; Code[20])
         {
             Caption = 'Seminar No.';
-            DataClassification = AccountData;
             TableRelation = "CSD Seminar";
             //te kryeje validime dhe te plotesoje fushat kur modifikohet seminar no.
             //to understand how it makes sure that you cannot change the Seminar No. if there are participants in the seminar.
-            //??????????????????????????????
-            //??????????????????????????????
             trigger OnValidate();
             begin
                 if "Seminar No." <> xRec."Seminar No." then begin
@@ -83,21 +78,10 @@ table 50110 "CSD Seminar Reg. Header"
         field(4; "Seminar Name"; Text[50])
         {
             Caption = 'Seminar Name';
-            DataClassification = AccountData;
         }
-        // field(5; "Instructor Code"; Code[10])
-        // {
-        //     TableRelation = Resource where (Type = const (Person));
-
-        //     trigger OnValidate();
-        //     begin
-        //         CalcFields("Instructor Name");
-        //     end;
-        // }
         field(5; "Instructor Resource No."; Code[20])
         {
             Caption = 'Instructor Resource No.';
-            DataClassification = AccountData;
             TableRelation = Resource where(Type = const(Person));
 
             trigger OnValidate();
@@ -116,31 +100,26 @@ table 50110 "CSD Seminar Reg. Header"
         field(7; Status; Option)
         {
             Caption = 'Status';
-            DataClassification = AccountData;
             OptionCaption = 'Planning,Registration,Closed,Canceled';
             OptionMembers = Planning,Registration,Closed,Canceled;
         }
         field(8; Duration; Decimal)
         {
             Caption = 'Duration';
-            DataClassification = AccountData;
             DecimalPlaces = 0 : 1;
         }
         field(9; "Maximum Participants"; Integer)
         {
             Caption = 'Maximum Participants';
-            DataClassification = AccountData;
         }
         field(10; "Minimum Participants"; Integer)
         {
             Caption = 'Minimum Participants';
             DataClassification = AccountData;
         }
-        //field(11;"Room Code";Code[10])
         field(11; "Room Resource No."; Code[20])
         {
             Caption = 'Room Resource No.';
-            DataClassification = AccountData;
             TableRelation = Resource where(Type = const(Machine));
 
             trigger OnValidate();
@@ -181,22 +160,19 @@ table 50110 "CSD Seminar Reg. Header"
         field(12; "Room Name"; Text[30])
         {
             Caption = 'Room Name';
-            DataClassification = AccountData;
         }
         field(13; "Room Address"; Text[30])
         {
             Caption = 'Room Address';
-            DataClassification = AccountData;
         }
         field(14; "Room Address 2"; Text[30])
         {
             Caption = 'Room Address 2';
-            DataClassification = AccountData;
+
         }
         field(15; "Room Post Code"; Code[20])
         {
             Caption = 'Room Post Code';
-            DataClassification = AccountData;
             TableRelation = "Post Code".Code;
             ValidateTableRelation = false;
 
@@ -209,29 +185,20 @@ table 50110 "CSD Seminar Reg. Header"
         field(16; "Room City"; Text[30])
         {
             Caption = 'Room City';
-            DataClassification = AccountData;
-
-            trigger OnValidate();
-            begin
-                PostCode.ValidateCity("Room City", "Room Post Code", "Room County", "Room Country/Reg. Code", (CurrFieldNo <> 0) and GuiAllowed);
-            end;
         }
         field(17; "Room Country/Reg. Code"; Code[10])
         {
             Caption = 'Room Country/Reg';
-            DataClassification = AccountData;
             TableRelation = "Country/Region";
         }
         field(18; "Room County"; Text[30])
         {
             Caption = 'Room County';
-            DataClassification = AccountData;
         }
         field(19; "Seminar Price"; Decimal)
         {
             AutoFormatType = 1;
             Caption = 'Seminar Price';
-            //DataClassification = AccountData;
 
             trigger OnValidate();
             begin
@@ -258,13 +225,11 @@ table 50110 "CSD Seminar Reg. Header"
         field(20; "Gen. Prod. Posting Group"; Code[10])
         {
             Caption = 'Gen. Prod. Posting Group';
-            DataClassification = AccountData;
             TableRelation = "Gen. Product Posting Group".Code;
         }
         field(21; "VAT Prod. Posting Group"; Code[10])
         {
             Caption = 'VAT Prod. Posting Group';
-            DataClassification = AccountData;
             TableRelation = "VAT Product Posting Group".Code;
         }
         field(22; Comment; Boolean)
@@ -278,48 +243,43 @@ table 50110 "CSD Seminar Reg. Header"
         field(23; "Posting Date"; Date)
         {
             Caption = 'Posting Date';
-            DataClassification = AccountData;
+
         }
         field(24; "Document Date"; Date)
         {
             Caption = 'Document Date';
-            DataClassification = AccountData;
+
         }
         field(25; "Reason Code"; Code[10])
         {
             Caption = 'Reason Code';
-            DataClassification = AccountData;
             TableRelation = "Reason Code".Code;
         }
         field(26; "No. Series"; Code[10])
         {
             Caption = 'No. Series';
-            DataClassification = AccountData;
             Editable = false;
             TableRelation = "No. Series".Code;
         }
         field(27; "Posting No. Series"; Code[10])
         {
             Caption = 'Posting No. Series';
-            DataClassification = AccountData;
             TableRelation = "No. Series".Code;
-
+            //si perdoret funks standart i kerkimit
             trigger OnLookup();
             begin
-                SeminarRegHeader.Reset();
-                if SeminarRegHeader.FindFirst() then begin
-                    //with SeminarRegHeader do begin
-                    SeminarRegHeader := Rec;
-                    SeminarSetup.Get();
-                    SeminarSetup.TestField("Seminar Registration Nos.");
-                    SeminarSetup.TestField("Posted Seminar Reg. Nos.");
-                    if NoSeriesMgt.LookupSeries(SeminarSetup."Posted Seminar Reg. Nos.", "Posting No. Series")
-                    then
-                        Validate("Posting No. Series");
-                    Rec := SeminarRegHeader;
-                end;
-            end;
 
+                SeminarRegHeader := Rec;
+                SeminarSetup.Get();
+                SeminarSetup.TestField("Seminar Registration Nos.");
+                SeminarSetup.TestField("Posted Seminar Reg. Nos.");
+                if NoSeriesMgt.LookupSeries(SeminarSetup."Posted Seminar Reg. Nos.", SeminarRegHeader."Posting No. Series")
+                then
+                    SeminarRegHeader.Validate(SeminarRegHeader."Posting No. Series");
+                Rec := SeminarRegHeader;
+
+            end;
+            //kur user fut nje valid number series
             trigger OnValidate();
             begin
                 if "Posting No. Series" <> '' then begin
@@ -334,12 +294,11 @@ table 50110 "CSD Seminar Reg. Header"
         field(28; "Posting No."; Code[20])
         {
             Caption = 'Posting No.';
-            DataClassification = AccountData;
+
         }
         field(40; "No. Printed"; Integer)
         {
             Caption = 'No. Printed';
-            DataClassification = AccountData;
             Editable = false;
         }
     }
@@ -433,24 +392,21 @@ table 50110 "CSD Seminar Reg. Header"
         NoSeriesMgt.SetDefaultSeries("Posting No. Series",
         SeminarSetup."Posted Seminar Reg. Nos.");
     end;
-
+    // that makes sure there is a value in the Seminar Reg Nos. field in the Seminar Setup table,
+    //and then calls the SelectSeries function in the NoSeriesManagement codeunit to check the series number.
+    //If this function returns True, call the SetSeries function in the NoSeriesManagement codeunit to set the No. field,
+    //and then return True.
     procedure AssistEdit(OldSeminarRegHeader: Record "CSD Seminar Reg. Header"): Boolean;
     begin
-        SeminarRegHeader.Reset();
-        if SeminarRegHeader.FindFirst() then begin
-            ;
-            //with SeminarRegHeader do begin
-            SeminarRegHeader := Rec;
+        SeminarRegHeader := Rec;
+        SeminarSetup.Get();
+        SeminarSetup.TestField("Seminar Registration Nos.");
+        if NoSeriesMgt.SelectSeries(SeminarSetup."Seminar Registration Nos.", OldSeminarRegHeader."No. Series", SeminarRegHeader."No. Series") then begin
             SeminarSetup.Get();
             SeminarSetup.TestField("Seminar Registration Nos.");
-            if NoSeriesMgt.SelectSeries(SeminarSetup."Seminar Registration Nos.", OldSeminarRegHeader."No. Series", "No. Series") then begin
-                SeminarSetup.Get();
-                SeminarSetup.TestField("Seminar Registration Nos.");
-                NoSeriesMgt.SetSeries("No.");
-                Rec := SeminarRegHeader;
-                exit(true);
-            end;
+            NoSeriesMgt.SetSeries(SeminarRegHeader."No.");
+            Rec := SeminarRegHeader;
+            exit(true);
         end;
     end;
-    //end;
 }
