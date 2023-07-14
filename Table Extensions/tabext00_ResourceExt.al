@@ -12,6 +12,8 @@ tableextension 50100 "CSD ResourceExt" extends Resource
                 Rec.TestField("Unit Cost");
             end;
         }
+
+
         field(50101; "CSD Resource Type"; Option)
         {
             Caption = 'Resource Type';
