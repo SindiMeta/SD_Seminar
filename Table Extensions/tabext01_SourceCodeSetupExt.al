@@ -3,6 +3,8 @@ tableextension 50101 "CSD SourceCodeSetupExt" extends "Source Code Setup"
 // Chapter 7 - Lab 1-7
 // - Added new fields:
 // - Seminar
+//The Source Code field is only shown in the Ledger Entries and Register pages, never in journals or documents.
+
 {
     fields
     {

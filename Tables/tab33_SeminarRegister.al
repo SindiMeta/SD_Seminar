@@ -3,7 +3,7 @@ table 50133 "CSD Seminar Register"
     // CSD1.00 - 2018-01-01 - D. E. Veloper
     //   Chapter 7 - Lab 1
     //     - Created new table
-    //Keeps the transaction log for posted seminars.
+    //summary for transaction
     Caption = 'Seminar Register';
 
     fields
