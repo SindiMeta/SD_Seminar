@@ -73,13 +73,14 @@ page 50110 "CSD Seminar Registration"
                     ApplicationArea = All;
                 }
                 ///lidhjen me lines
-                part(SeminarRegistrationLines; "CSD Seminar Reg. Subpage")
-                {
-                    ApplicationArea = All;
-                    Caption = 'Lines';
-                    SubPageLink = "Document No." = field("No.");
-                }
             }
+            part(SeminarRegistrationLines; "CSD Seminar Reg. Subpage")
+            {
+                ApplicationArea = All;
+                Caption = 'Lines';
+                SubPageLink = "Document No." = field("No.");
+            }
+
             group("Seminar Room")
             {
 

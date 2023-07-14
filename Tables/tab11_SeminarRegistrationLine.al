@@ -58,12 +58,7 @@ table 50111 "CSD Seminar Registration Line"
 
                 CalcFields("Participant Name");
             end;
-            //makes sure that the contact selected by the user is related to the customer that is specified in the Bill-to Customer No. field.
-            //It filters the information in the Contact Business
-            //Relation table to determine whether the contact that the user has specified is related to the customer that is referenced in
-            //the Bill-to Customer No. field. If the contact is not related to the customer, an error that describes the problem is thrown.
-            //The trigger also calls the CalcField function to retrieve the Participant Name field from the Contact table.
-            //The Participant Name field is a FlowField that uses the Lookup method to dynamically calculate the value of the field
+            
             trigger OnValidate();
             begin
                 if ("Bill-to Customer No." <> '') and
