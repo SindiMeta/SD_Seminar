@@ -192,6 +192,7 @@ page 50134 "CSD Posted Seminar Reg."
                     //RunPageLink = Document No.=Field(No.);
                     RunPageLink = "Document No." = field("No.");
                 }
+
             }
         }
         area(Processing)

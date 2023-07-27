@@ -1,6 +1,5 @@
 enumextension 50100 MyEnumExtension extends "Resource Type"
 {
-
     value(2; "Instructor")
     {
         Caption = 'Instructor';
@@ -9,5 +8,4 @@ enumextension 50100 MyEnumExtension extends "Resource Type"
     {
         Caption = 'Room';
     }
-
 }

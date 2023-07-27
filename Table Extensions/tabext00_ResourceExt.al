@@ -12,7 +12,12 @@ tableextension 50100 "CSD ResourceExt" extends Resource
                 Rec.TestField("Unit Cost");
             end;
         }
+        // modify(Type)
+        //         {
+        //             //OptionCaption = 'Instructor,Room';
+        //             v: Enum ;
 
+        //         }
 
         field(50101; "CSD Resource Type"; Option)
         {

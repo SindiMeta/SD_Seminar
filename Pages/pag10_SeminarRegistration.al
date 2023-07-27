@@ -80,6 +80,12 @@ page 50110 "CSD Seminar Registration"
                 Caption = 'Lines';
                 SubPageLink = "Document No." = field("No.");
             }
+            part(ResponsibleReportLines; "Responsible Employee SubPage")
+            {
+                ApplicationArea = All;
+                Caption = 'Responsible Employee';
+                SubPageLink = "No." = field("No.");
+            }
 
             group("Seminar Room")
             {
@@ -207,6 +213,17 @@ page 50110 "CSD Seminar Registration"
                         SeminarReportSelection.PrintReportSelection
                         (SeminarReportSelection.Usage::Registration, Rec);
                     end;
+                }
+                action("&Journal")
+                {
+                    ApplicationArea = All;
+                    Caption = '&Journal';
+                    Image = PostDocument;
+                    Promoted = true;
+                    PromotedCategory = Process;
+                    PromotedIsBig = true;
+                    RunObject = codeunit "CSD Seminar Jnl.-Post Line";
+                    ShortcutKey = F9;
                 }
             }
         }

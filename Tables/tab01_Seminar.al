@@ -9,6 +9,7 @@ table 50101 "CSD Seminar"
 
     fields
     {
+
         field(10; "No."; Code[20])
         {
             Caption = 'No';

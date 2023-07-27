@@ -64,4 +64,5 @@ report 50101 SeminarRegParticipantList
     begin
         "Company Information".Get();
     end;
+
 }
